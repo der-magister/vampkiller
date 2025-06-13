@@ -1,0 +1,64 @@
+XL4
+H 9 areas B global symbols
+M globals
+O -msm83
+S .__.ABS. Def00000000
+A _CODE size 0 flags 0 addr 0
+A _DATA size 200 flags 0 addr 0
+S _v_slp Def000001FA
+S _v_steins Def000001FF
+S _v_sweih Def000001FD
+S _v_time Def00000001
+S _v_skey Def000001FC
+S _v_room Def00000000
+S _v_pflock Def000001FE
+S _v_shstone Def000001FB
+S _v_lvldat Def00000002
+S _v_lvldatmod Def000000FE
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00 00 00
+R 00 00 01 00
+T 00 00 00 00
+R 00 00 01 00
+T 01 00 00 00
+R 00 00 01 00
+T 01 00 00 00
+R 00 00 01 00
+T 02 00 00 00
+R 00 00 01 00
+T 02 00 00 00
+R 00 00 01 00
+T FE 00 00 00
+R 00 00 01 00
+T FE 00 00 00
+R 00 00 01 00
+T FA 01 00 00
+R 00 00 01 00
+T FA 01 00 00
+R 00 00 01 00
+T FB 01 00 00
+R 00 00 01 00
+T FB 01 00 00
+R 00 00 01 00
+T FC 01 00 00
+R 00 00 01 00
+T FC 01 00 00
+R 00 00 01 00
+T FD 01 00 00
+R 00 00 01 00
+T FD 01 00 00
+R 00 00 01 00
+T FE 01 00 00
+R 00 00 01 00
+T FE 01 00 00
+R 00 00 01 00
+T FF 01 00 00
+R 00 00 01 00
+T FF 01 00 00
+R 00 00 01 00
