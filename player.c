@@ -27,8 +27,8 @@
 void p_player_init (void) __nonbanked
 {
 	//Spielerwerte setzen
-	v_slp = 3; v_shstone = 0; v_skey = 0; v_sweih = 0; v_pflock = FALSE; 
-	v_steins = FALSE; v_sxk = 80; v_syk = 40; v_sri = UP;
+	v_slp = 3; v_skey = 0; v_sweih = 0; v_pflock = FALSE; 
+	v_sxk = 80; v_syk = 40; v_sri = UP;
 
 	set_sprite_tile (0, 0);	//Spielersprite
 	set_sprite_tile (1, 3); //Attacksprite Spieler
@@ -126,7 +126,6 @@ void p_player_attack (void) __nonbanked
 		else if (v_sri == RIGHT) {
 			move_sprite (1, v_sxk + 8, v_syk);
 		}
-
 		v_angriff = TRUE; v_action = FALSE; v_angriffstimer = 0;
 	}
 }

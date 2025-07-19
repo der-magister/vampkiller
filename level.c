@@ -28,7 +28,7 @@
 
 #include "gfx/lvl/rooms.h"
 
-#include "gfx/txt/shield-1.h"
+#include "gfx/txt/texte.h"
 
 //Init
 void p_level_init (void) __nonbanked
@@ -130,6 +130,7 @@ void p_level_room5 (void) __nonbanked
 		p_engine_showMap (room6);
 		p_level_changeRoom (6, v_sxk, 128);
 	}
+	p_umgebung_truheWeihwasser (231, 2);
 }
 
 //Raum 6 spezifische Aspekte
@@ -194,6 +195,7 @@ void p_level_room9 (void) __nonbanked
 	}
 }
 
+//Raum 10 spezifische Aspekte
 void p_level_room10 (void) __nonbanked
 {
 	if (v_smk == 239)
@@ -202,7 +204,55 @@ void p_level_room10 (void) __nonbanked
 		p_engine_showMap (room9);
 		p_level_changeRoom (9, v_sxk, 24);	
 	}
+	else if (v_smk == 179) {
+		p_engine_loadMap (room11);
+		p_engine_showMap (room11);
+		p_level_changeRoom (11, 16, v_syk);	
+	}
 }
+
+//Raum 11 spezifische Aspekte
+void p_level_room11 (void) __nonbanked
+{
+	if (v_smk == 162) {
+		p_engine_loadMap (room10);
+		p_engine_showMap (room10);
+		p_level_changeRoom (10, 152, v_syk);	
+	}
+	else if (v_smk == 179) {
+		p_engine_loadMap (room12);
+		p_engine_showMap (room12);
+		p_level_changeRoom (12, 16, v_syk);		
+	}
+}
+
+//Raum 12 spezifische Aspekte
+void p_level_room12 (void) __nonbanked
+{
+	if (v_smk == 162) {
+		p_engine_loadMap (room11);
+		p_engine_showMap (room11);
+		p_level_changeRoom (11, 152, v_syk);	
+	}
+	else if (v_smk == 245) {
+		p_engine_loadMap (room13);
+		p_engine_showMap (room13);
+		p_level_changeRoom (13, v_sxk, 24);	
+
+	}
+
+}
+
+//Raum 13 spezifische Aspekte
+void p_level_room13 (void) __nonbanked
+{
+	if (v_smk == 11) {
+		p_engine_loadMap (room12);
+		p_engine_showMap (room12);
+		p_level_changeRoom (12, v_sxk, 128);		
+	}
+}
+
 
 //Levelkontrolle
 void p_level_control (void) __nonbanked
@@ -217,4 +267,6 @@ void p_level_control (void) __nonbanked
 	else if (v_room == 8) p_level_room8 ();
 	else if (v_room == 9) p_level_room9 ();
 	else if (v_room == 10) p_level_room10 ();
+	else if (v_room == 11) p_level_room11 ();
+	else if (v_room == 12) p_level_room12 ();
 }

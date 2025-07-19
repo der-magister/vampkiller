@@ -43,12 +43,10 @@ unsigned char v_lvldatmod [252];		//modifizierten Grafikdaten des aktuellen  Rau
 
 //Spielerdaten
 uint8_t v_slp;					//aktuelle Lebensenergie Spieler (max. 3)
-uint8_t v_shstone;				//aktuelle Anzahl Heilige Steine (max. 10)
 uint8_t v_skey;					//aktuelle Anzahl Schlüssel (max. 3)
 uint8_t v_sweih;				//aktuelle Anzahl Weihwasserphiole (max. 3)
 
 uint8_t v_pflock;				//Eispflock in Besitz
-uint8_t v_steins;				//Steinschleuer in Besitz?
 
 uint8_t v_sxk;					//X-Koordinate Spieler auf Screen
 uint8_t v_syk;					//Y-Koordinate Spieler auf Screen

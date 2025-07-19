@@ -131,4 +131,32 @@ void p_gegner_lvlset (void) __nonbanked
 		p_gegner_set (2, 1, 64, 32, 1, DOWN);
 		p_gegner_set (3, 1, 112, 120, 1, UP);
 	}
+	else if (v_room == 8) {
+		p_gegner_set (2, 2, 112, 120, 1, UP);
+		p_gegner_set (3, 2, 40, 56, 1, DOWN);
+	}
+	else if (v_room == 9)  {
+		p_gegner_set (2, 2, 80, 56, 1, LEFT);
+		p_gegner_set (3, 2, 136, 112, 2, RIGHT);	
+	}
+	else if (v_room == 10) {
+		p_gegner_set (2, 2, 32, 80, 1, RIGHT);
+		p_gegner_set (3, 1, 144, 80, 1, LEFT);
+		p_gegner_set (4, 1, 80, 120, 1, UP);	
+	}
+	else if (v_room == 11) {
+		p_gegner_set (2, 2, 48, 120, 1, UP);
+		p_gegner_set (3, 1, 96, 32, 1, RIGHT);
+		p_gegner_set (4, 2, 88, 40, 1, DOWN);	
+	}
+	else if (v_room == 12) {
+		p_gegner_set (2, 1, 88, 80, 1, DOWN);
+		p_gegner_set (3, 2, 144, 72, 1, LEFT);
+		p_gegner_set (4, 1, 48, 120, 1, UP);
+	}
+	else if (v_room == 13) {
+		p_gegner_set (2, 2, 64, 80, 1, RIGHT);
+		p_gegner_set (3, 2, 144, 48, 1, LEFT);
+		p_gegner_set (4, 2, 24, 112, 1, RIGHT);	
+	}
 }

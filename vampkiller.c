@@ -38,7 +38,7 @@ void main (void) __nonbanked
 	while (v_gameover == FALSE)
 	{
 		//Spielerbewegung
-		if (v_movetimer == 6) {
+		if (v_movetimer == 7) {
 			if (joypad () & J_UP) p_player_move (UP);
 			else if (joypad () & J_DOWN) p_player_move (DOWN);
 			else if (joypad () & J_LEFT) p_player_move (LEFT);
@@ -61,7 +61,7 @@ void main (void) __nonbanked
         		move_sprite (1, 0, 0); v_angriff = FALSE;
       		}
 
-      		if (v_gegnertimer == 8) {
+      		if (v_gegnertimer == 9) {
       			p_gegner_move ();
       		}
 

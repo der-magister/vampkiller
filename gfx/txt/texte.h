@@ -18,23 +18,14 @@
 //
 //   Kontakt: heiko.wolf.mail@gmail.com
 
-//   File: rooms.h
+//   File: texte.h
 
-#ifndef _ROOMS_H_
-#define _ROOMS_H_
+#ifndef _TEXTE_H_
+#define _TEXTE_H_
 
-extern const unsigned char room1[252];
-extern const unsigned char room2[252];
-extern const unsigned char room3[252];
-extern const unsigned char room4[252];
-extern const unsigned char room5[252];
-extern const unsigned char room6[252];
-extern const unsigned char room7[252];
-extern const unsigned char room8[252];
-extern const unsigned char room9[252];
-extern const unsigned char room10[252];
-extern const unsigned char room11[252];
-extern const unsigned char room12[252];
-extern const unsigned char room13[252];
+extern const unsigned char eispflock[72];
+extern const unsigned char leer[72];
+extern const unsigned char shield1[72];
+extern const unsigned char weihwasser[72];
 
 #endif

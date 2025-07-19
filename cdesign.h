@@ -27,8 +27,8 @@
 
 extern void p_cdesign_umwandlung (uint8_t l_w, uint8_t l_xk, uint8_t l_yk) __nonbanked;
 extern void p_cdesign_showLP (void) __nonbanked;
-extern void p_cdesign_show_hStone (void) __nonbanked;
 extern void p_cdesign_showKey (void) __nonbanked;
+extern void p_cdesign_showWeihwasser (void) __nonbanked;
 extern void p_cdesign_showTime (void) __nonbanked;
 extern void p_cdesign_showMapKoord (void) __nonbanked;
 extern void p_cdesign_showXK (void) __nonbanked;

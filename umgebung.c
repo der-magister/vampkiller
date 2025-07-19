@@ -23,9 +23,9 @@
 #include "umgebung.h"
 #include "player.h"
 #include "text.h"
+#include "cdesign.h"
 
-#include "gfx/txt/leer.h"
-#include "gfx/txt/eispflock.h"
+#include "gfx/txt/texte.h"
 
 //Schildtext anzeigen bei Map-Koordinate
 void p_umgebung_schild (uint8_t l_mk, unsigned char l_txt [81]) __nonbanked
@@ -46,6 +46,21 @@ void p_umgebung_truheEispflock (uint8_t l_mk, uint8_t l_nr) __nonbanked
 	else if ((l_mk == v_smk) && (v_kiste [l_nr] == 1)) {
 		p_text_viewTXT (leer);
 	}
+}
+
+//Truhe mit Weihwasser
+void p_umgebung_truheWeihwasser (uint8_t l_mk, uint8_t l_nr) __nonbanked
+{
+	if ((l_mk == v_smk) && (v_kiste [l_nr] == 0)) {
+		p_text_viewTXT (weihwasser);
+		
+		v_kiste [l_nr] = 1; v_sweih += 1;
+		p_cdesign_showWeihwasser ();
+	}
+	else if ((l_mk == v_smk) && (v_kiste [l_nr] == 1)) {
+		p_text_viewTXT (leer);
+	}
+
 }
 
 void p_umgebung_disables (void) __nonbanked
