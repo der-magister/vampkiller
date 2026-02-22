@@ -78,14 +78,14 @@ void p_level_room2 (void) __nonbanked
 		p_engine_showMap (room1);
 		p_level_changeRoom (1, v_sxk, 24);
 	}
-	else if (v_smk == 8) {
+	else if ((v_smk == 8) && (v_tuer [0] == TRUE)) {
 		p_engine_loadMap (room3);
 		p_engine_showMap (room3);
 		p_level_changeRoom (3, v_sxk, 128);
 	}
 	p_umgebung_truheEispflock (52, 1);
 
-	p_umgebung_tuerzu (8, 0);
+	if (v_tuer [0] == FALSE) { p_umgebung_tuerzu (8, 0); }
 }
 
 //Raum 3 spezifische Aspekte
