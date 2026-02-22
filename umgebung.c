@@ -41,7 +41,7 @@ void p_umgebung_truheEispflock (uint8_t l_mk, uint8_t l_nr) __nonbanked
 	if ((l_mk == v_smk) && (v_kiste [l_nr] == 0)) {
 		p_text_viewTXT (eispflock);
 		
-		v_kiste [l_nr] = 1; v_pflock = TRUE;
+		v_kiste [l_nr] = 1; v_pflock = TRUE; v_tuer [0] = TRUE;
 	}
 	else if ((l_mk == v_smk) && (v_kiste [l_nr] == 1)) {
 		p_text_viewTXT (leer);
@@ -61,6 +61,13 @@ void p_umgebung_truheWeihwasser (uint8_t l_mk, uint8_t l_nr) __nonbanked
 		p_text_viewTXT (leer);
 	}
 
+}
+
+void p_umgebung_tuerzu (uint8_t l_mk, uint8_t l_nr) __nonbanked
+{
+	if ((l_mk == v_smk) && (v_tuer [l_nr] == FALSE)) {
+		p_text_viewTXT (tuerzu);
+	}
 }
 
 void p_umgebung_disables (void) __nonbanked

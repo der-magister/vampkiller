@@ -1,6 +1,6 @@
 //   Vampkiller
 //
-//   Copyright (C) 2024-2025 Heiko Wolf
+//   Copyright (C) 2024-2026 Heiko Wolf
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License As published by
@@ -61,4 +61,5 @@ uint8_t v_gmk [5];				//Map-Koordinate Gegner
 uint8_t v_gri [5];                              //Richtungsanzeige
 
 //Umgebung
-uint8_t v_kiste [5];				//Kisten offen True / false				
+uint8_t v_kiste [5];				//Kisten offen true / false
+uint8_t v_tuer [3];				// Tuer offen true / false			

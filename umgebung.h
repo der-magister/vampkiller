@@ -28,6 +28,7 @@
 extern void p_umgebung_schild (uint8_t l_mk, unsigned char l_txt [81]) __nonbanked;
 extern void p_umgebung_truheEispflock (uint8_t l_mk, uint8_t l_nr) __nonbanked;
 extern void p_umgebung_truheWeihwasser (uint8_t l_mk, uint8_t l_nr) __nonbanked;
+extern void p_umgebung_tuerzu (uint8_t l_mk, uint8_t l_nr) __nonbanked;
 extern void p_umgebung_disables (void) __nonbanked;
 
 #endif

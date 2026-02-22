@@ -84,6 +84,8 @@ void p_level_room2 (void) __nonbanked
 		p_level_changeRoom (3, v_sxk, 128);
 	}
 	p_umgebung_truheEispflock (52, 1);
+
+	p_umgebung_tuerzu (8, 0);
 }
 
 //Raum 3 spezifische Aspekte

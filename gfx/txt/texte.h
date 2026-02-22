@@ -1,6 +1,6 @@
 //   Vampkiller
 //
-//   Copyright (C) 2024-2025 Heiko Wolf
+//   Copyright (C) 2024-2026 Heiko Wolf
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License As published by
@@ -27,5 +27,6 @@ extern const unsigned char eispflock[72];
 extern const unsigned char leer[72];
 extern const unsigned char shield1[72];
 extern const unsigned char weihwasser[72];
+extern const unsigned char tuerzu[72];
 
 #endif

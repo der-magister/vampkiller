@@ -1,6 +1,6 @@
 //   Vampkiller
 //
-//   Copyright (C) 2024-2025 Heiko Wolf
+//   Copyright (C) 2024-2026 Heiko Wolf
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License As published by
@@ -79,5 +79,6 @@ extern uint8_t v_gri [5];                               //Richtungsanzeige
 
 //umgebung
 extern uint8_t v_kiste [5];				//Kisten offen True / false
+extern uint8_t v_tuer [3];				// Tuer offen true / false			
 
 #endif
