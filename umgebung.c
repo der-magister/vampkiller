@@ -112,16 +112,21 @@ void p_umgebung_truheSchluessel (uint8_t l_mk, uint8_t l_nr) __nonbanked
 //Truhe mit Uhr 
 void p_umgebung_truheUhr (uint8_t l_mk, uint8_t l_nr) __nonbanked
 {
-	if ((l_mk == v_smk) && (v_kiste [l_nr] == 0) && (v_time < 245)) {
-		p_text_viewTXT (uhr);
+	if ((l_mk == v_smk) && (v_kiste [l_nr] == 0)) {
+
+		if (v_time < 245) {
+			p_text_viewTXT (uhr);
 		
-		v_kiste [l_nr] = 1; v_time += 10;
-		p_cdesign_showTime ();
+			v_kiste [l_nr] = 1; v_time += 10;
+			p_cdesign_showTime ();
+		}
+		else if (v_time > 244) {
+			p_text_viewTXT (nichtnuetzlich); 
+		}
 	}
 	else if ((l_mk == v_smk) && (v_kiste [l_nr] == 1)) {
 		p_text_viewTXT (leer);
 	}	
-	else { p_text_viewTXT (nichtnuetzlich); }
 }
 
 void p_umgebung_disables (void) __nonbanked

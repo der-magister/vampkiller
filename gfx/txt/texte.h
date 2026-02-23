@@ -26,6 +26,7 @@
 extern const unsigned char eispflock[72];
 extern const unsigned char leer[72];
 extern const unsigned char shield1[72];
+extern const unsigned char schild2[72];
 extern const unsigned char weihwasser[72];
 extern const unsigned char tuerzu[72];
 extern const unsigned char herz[72];

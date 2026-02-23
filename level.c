@@ -148,6 +148,11 @@ void p_level_room6 (void) __nonbanked
 		p_engine_showMap (room7);
 		p_level_changeRoom (7, 152, v_syk);
 	}
+	else if (v_smk == 89) {
+		p_engine_loadMap (room17);
+		p_engine_showMap (room17);
+		p_level_changeRoom (17, 72, v_syk);	
+	}
 }
 
 //Raum 7 spezifische Aspekte
@@ -195,6 +200,7 @@ void p_level_room9 (void) __nonbanked
 		p_engine_showMap (room10);
 		p_level_changeRoom (10, v_sxk, 128);	
 	}
+	p_umgebung_truheHerz (199, 3);
 }
 
 //Raum 10 spezifische Aspekte
@@ -242,6 +248,7 @@ void p_level_room12 (void) __nonbanked
 		p_level_changeRoom (13, v_sxk, 24);	
 
 	}
+	p_umgebung_truheUhr (63, 4);
 
 }
 
@@ -260,6 +267,7 @@ void p_level_room13 (void) __nonbanked
 	}
 }
 
+//Raum 14 spezifische Aspekte
 void p_level_room14 (void) __nonbanked
 {
 	if (v_smk == 162) {
@@ -274,6 +282,17 @@ void p_level_room14 (void) __nonbanked
 	}	
 }
 
+//Raum 17 spezifische Aspekte
+void p_level_room17 (void) __nonbanked
+{
+	if (v_smk == 72) {
+		p_engine_loadMap (room6);
+		p_engine_showMap (room6);
+
+		p_level_changeRoom (6, 152, v_syk);
+	}
+	p_umgebung_schild (142, schild2);
+}
 
 
 //Levelkontrolle
@@ -293,4 +312,6 @@ void p_level_control (void) __nonbanked
 	else if (v_room == 12) p_level_room12 ();
 	else if (v_room == 13) p_level_room13 ();
 	else if (v_room == 14) p_level_room14 ();
+
+	else if (v_room == 17) p_level_room17 ();
 }
