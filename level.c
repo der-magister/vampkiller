@@ -282,6 +282,17 @@ void p_level_room14 (void) __nonbanked
 	}	
 }
 
+//Raum 14 spezifische Aspekte
+void p_level_room15 (void) __nonbanked
+{
+	if (v_smk == 162) {
+		p_engine_loadMap (room14);
+		p_engine_showMap (room14);
+		p_level_changeRoom (14, 152, v_syk);	
+	}
+}
+
+
 //Raum 17 spezifische Aspekte
 void p_level_room17 (void) __nonbanked
 {
@@ -312,6 +323,6 @@ void p_level_control (void) __nonbanked
 	else if (v_room == 12) p_level_room12 ();
 	else if (v_room == 13) p_level_room13 ();
 	else if (v_room == 14) p_level_room14 ();
-
+	else if (v_room == 15) p_level_room15 ();
 	else if (v_room == 17) p_level_room17 ();
 }
