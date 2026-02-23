@@ -33,6 +33,14 @@ extern void p_level_room3 (void) __nonbanked;
 extern void p_level_room4 (void) __nonbanked;
 extern void p_level_room5 (void) __nonbanked;
 extern void p_level_room6 (void) __nonbanked;
+extern void p_level_room7 (void) __nonbanked;
+extern void p_level_room8 (void) __nonbanked;
+extern void p_level_room9 (void) __nonbanked;
+extern void p_level_room10 (void) __nonbanked;
+extern void p_level_room11 (void) __nonbanked;
+extern void p_level_room12 (void) __nonbanked;
+extern void p_level_room13 (void) __nonbanked;
+extern void p_level_room14 (void) __nonbanked;
 extern void p_level_control (void) __nonbanked;
 
 #endif

@@ -1,6 +1,6 @@
 //   Vampkiller
 //
-//   Copyright (C) 2024-2025 Heiko Wolf
+//   Copyright (C) 2024-2026 Heiko Wolf
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License As published by
@@ -37,5 +37,6 @@ extern const unsigned char room11[252];
 extern const unsigned char room12[252];
 extern const unsigned char room13[252];
 extern const unsigned char room14[252];
+extern const unsigned char room15[252];
 
 #endif

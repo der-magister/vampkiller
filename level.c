@@ -253,12 +253,27 @@ void p_level_room13 (void) __nonbanked
 		p_engine_showMap (room12);
 		p_level_changeRoom (12, v_sxk, 128);		
 	}
-	else (v_smk == 125) {
+	else if (v_smk == 125) {
 		p_engine_loadMap (room14);
-		p_engine_showMap (room12);
+		p_engine_showMap (room14);
 		p_level_changeRoom (14, 16, v_syk);	
 	}
 }
+
+void p_level_room14 (void) __nonbanked
+{
+	if (v_smk == 162) {
+		p_engine_loadMap (room13);
+		p_engine_showMap (room13);
+		p_level_changeRoom (13, 152, v_syk);	
+	}
+	else if (v_smk == 125) {
+		p_engine_loadMap (room15);
+		p_engine_showMap (room15);
+		p_level_changeRoom (15, 16, v_syk);	
+	}	
+}
+
 
 
 //Levelkontrolle
@@ -277,4 +292,5 @@ void p_level_control (void) __nonbanked
 	else if (v_room == 11) p_level_room11 ();
 	else if (v_room == 12) p_level_room12 ();
 	else if (v_room == 13) p_level_room13 ();
+	else if (v_room == 14) p_level_room14 ();
 }
