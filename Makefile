@@ -58,9 +58,12 @@ level.o:	level.c
 umgebung.o:	umgebung.c
 		$(CC) -c -o obj/umgebung.o umgebung.c
 
+aktionen.o:	aktionen.c
+		$(CC) -c -o obj/aktionen.o aktionen.c
+
 vampkiller.o:	vampkiller.c
 		$(CC) -c -o obj/vampkiller.o vampkiller.c
 
-vampkiller.gb:	fonttiles.o tsprites.o title.o gameborder.o textborder.o texte.o rooms.o globals.o cdesign.o init.o engine.o player.o gegner.o text.o level.o umgebung.o vampkiller.o
+vampkiller.gb:	fonttiles.o tsprites.o title.o gameborder.o textborder.o texte.o rooms.o globals.o cdesign.o init.o engine.o player.o gegner.o text.o level.o umgebung.o aktionen.o vampkiller.o
 
-		$(CC) -Wl-ya1B -Wm-yn"VAMPKILLER" -Wl-yt0x019  -o bin/vampkiller.gb obj/fonttiles.o obj/tsprites.o obj/title.o obj/gameborder.o obj/texte.o obj/textborder.o obj/rooms.o obj/globals.o obj/cdesign.o obj/init.o obj/engine.o obj/player.o obj/gegner.o obj/text.o obj/level.o obj/umgebung.o obj/vampkiller.o
+		$(CC) -Wl-ya1B -Wm-yn"VAMPKILLER" -Wl-yt0x019  -o bin/vampkiller.gb obj/fonttiles.o obj/tsprites.o obj/title.o obj/gameborder.o obj/texte.o obj/textborder.o obj/rooms.o obj/globals.o obj/cdesign.o obj/init.o obj/engine.o obj/player.o obj/gegner.o obj/text.o obj/level.o obj/umgebung.o obj/aktionen.o obj/vampkiller.o

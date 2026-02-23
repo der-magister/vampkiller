@@ -28,5 +28,9 @@ extern const unsigned char leer[72];
 extern const unsigned char shield1[72];
 extern const unsigned char weihwasser[72];
 extern const unsigned char tuerzu[72];
+extern const unsigned char herz[72];
+extern const unsigned char schluessel[72];
+extern const unsigned char uhr[72];
+extern const unsigned char nichtnuetzlich[72];
 
 #endif

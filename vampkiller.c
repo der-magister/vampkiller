@@ -56,6 +56,10 @@ void main (void) __nonbanked
         		p_player_attack ();
         	}
 
+        	/*if ((joypad () & J_B) && (v_angriff == FALSE)) {
+        		//p_use_weihwasser ();
+        	}*/
+
         	//Angriffsprite unsichtabr
 		if (v_angriffstimer == 8) {
         		move_sprite (1, 0, 0); v_angriff = FALSE;
