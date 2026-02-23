@@ -1,0 +1,122 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.1 #15267 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module init
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _p_level_init
+                                     11 	.globl _p_player_init
+                                     12 	.globl _p_cdesign_init
+                                     13 	.globl _p_cdesign_showStatus
+                                     14 	.globl _p_engine_showMap
+                                     15 	.globl _p_engine_loadMap
+                                     16 	.globl _p_engine_loadSpriteset
+                                     17 	.globl _p_engine_loadTileset
+                                     18 	.globl _p_init_stage_1
+                                     19 	.globl _p_init_stage_2
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 	.area _HRAM
+                                     24 ;--------------------------------------------------------
+                                     25 ; ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area _DATA
+                                     28 ;--------------------------------------------------------
+                                     29 ; ram data
+                                     30 ;--------------------------------------------------------
+                                     31 	.area _INITIALIZED
+                                     32 ;--------------------------------------------------------
+                                     33 ; absolute external ram data
+                                     34 ;--------------------------------------------------------
+                                     35 	.area _DABS (ABS)
+                                     36 ;--------------------------------------------------------
+                                     37 ; global & static initialisations
+                                     38 ;--------------------------------------------------------
+                                     39 	.area _HOME
+                                     40 	.area _GSINIT
+                                     41 	.area _GSFINAL
+                                     42 	.area _GSINIT
+                                     43 ;--------------------------------------------------------
+                                     44 ; Home
+                                     45 ;--------------------------------------------------------
+                                     46 	.area _HOME
+                                     47 ;init.c:35: void p_init_stage_1 (void) __nonbanked
+                                     48 ;	---------------------------------
+                                     49 ; Function p_init_stage_1
+                                     50 ; ---------------------------------
+    00000000                         51 _p_init_stage_1::
+                                     52 ;init.c:37: SPRITES_8x8;
+    00000000 F0r00            [12]   53 	ldh	a, (_LCDC_REG + 0)
+    00000002 E6 FB            [ 8]   54 	and	a, #0xfb
+    00000004 E0r00            [12]   55 	ldh	(_LCDC_REG + 0), a
+                                     56 ;init.c:38: HIDE_SPRITES;
+    00000006 F0r00            [12]   57 	ldh	a, (_LCDC_REG + 0)
+    00000008 E6 FD            [ 8]   58 	and	a, #0xfd
+    0000000A E0r00            [12]   59 	ldh	(_LCDC_REG + 0), a
+                                     60 ;init.c:39: HIDE_BKG;
+    0000000C F0r00            [12]   61 	ldh	a, (_LCDC_REG + 0)
+    0000000E E6 FE            [ 8]   62 	and	a, #0xfe
+    00000010 E0r00            [12]   63 	ldh	(_LCDC_REG + 0), a
+                                     64 ;init.c:42: p_engine_loadTileset (56, 127, fonttiles);
+    00000012 11r00r00         [12]   65 	ld	de, #_fonttiles
+    00000015 D5               [16]   66 	push	de
+    00000016 1E 7F            [ 8]   67 	ld	e, #0x7f
+    00000018 3E 38            [ 8]   68 	ld	a, #0x38
+    0000001A CDr00r00         [24]   69 	call	_p_engine_loadTileset
+                                     70 ;init.c:43: p_engine_loadSpriteset (0, 3, sprites);
+    0000001D 11r00r00         [12]   71 	ld	de, #_sprites
+    00000020 D5               [16]   72 	push	de
+    00000021 1E 03            [ 8]   73 	ld	e, #0x03
+    00000023 AF               [ 4]   74 	xor	a, a
+    00000024 CDr00r00         [24]   75 	call	_p_engine_loadSpriteset
+                                     76 ;init.c:45: v_time = 255; v_gameover = FALSE; v_movetimer = 0; v_gegnertimer = 0; v_timertimer = 0;
+    00000027 21r00r00         [12]   77 	ld	hl, #_v_time
+    0000002A 36 FF            [12]   78 	ld	(hl), #0xff
+    0000002C AF               [ 4]   79 	xor	a, a
+    0000002D EAr00r00         [16]   80 	ld	(#_v_gameover), a
+    00000030 EAr00r00         [16]   81 	ld	(#_v_movetimer),a
+    00000033 AF               [ 4]   82 	xor	a, a
+    00000034 EAr00r00         [16]   83 	ld	(#_v_gegnertimer), a
+    00000037 EAr00r00         [16]   84 	ld	(#_v_timertimer),a
+                                     85 ;init.c:46: }
+    0000003A C9               [16]   86 	ret
+                                     87 ;init.c:48: void p_init_stage_2 (void) __nonbanked
+                                     88 ;	---------------------------------
+                                     89 ; Function p_init_stage_2
+                                     90 ; ---------------------------------
+    0000003B                         91 _p_init_stage_2::
+                                     92 ;init.c:50: SHOW_BKG;
+    0000003B F0r00            [12]   93 	ldh	a, (_LCDC_REG + 0)
+    0000003D F6 01            [ 8]   94 	or	a, #0x01
+    0000003F E0r00            [12]   95 	ldh	(_LCDC_REG + 0), a
+                                     96 ;init.c:51: SHOW_SPRITES;
+    00000041 F0r00            [12]   97 	ldh	a, (_LCDC_REG + 0)
+    00000043 F6 02            [ 8]   98 	or	a, #0x02
+    00000045 E0r00            [12]   99 	ldh	(_LCDC_REG + 0), a
+                                    100 ;init.c:53: p_engine_loadMap (room1);
+    00000047 11r00r00         [12]  101 	ld	de, #_room1
+    0000004A CDr00r00         [24]  102 	call	_p_engine_loadMap
+                                    103 ;init.c:55: p_cdesign_init ();
+    0000004D CDr00r00         [24]  104 	call	_p_cdesign_init
+                                    105 ;init.c:56: p_engine_showMap (v_lvldat);
+    00000050 11r00r00         [12]  106 	ld	de, #_v_lvldat
+    00000053 CDr00r00         [24]  107 	call	_p_engine_showMap
+                                    108 ;init.c:58: p_player_init ();
+    00000056 CDr00r00         [24]  109 	call	_p_player_init
+                                    110 ;init.c:59: p_cdesign_showStatus ();
+    00000059 CDr00r00         [24]  111 	call	_p_cdesign_showStatus
+                                    112 ;init.c:60: p_level_init ();	
+                                    113 ;init.c:61: }
+    0000005C C3r00r00         [16]  114 	jp	_p_level_init
+                                    115 	.area _HOME
+                                    116 ;--------------------------------------------------------
+                                    117 ; code
+                                    118 ;--------------------------------------------------------
+                                    119 	.area _CODE
+                                    120 	.area _CODE
+                                    121 	.area _INITIALIZER
+                                    122 	.area _CABS (ABS)

@@ -5,7 +5,7 @@ BIN = 		vampkiller.gb
 all:		$(BIN)
 
 clean:		
-		rm -rf obj/* bin/*
+		rm -rf obj/*.o bin/*.cdb bin/*.ihx bin/*.map bin/*.noi
 
 romusage:	
 		romusage bin/vampkiller.gb -sRe -sRp

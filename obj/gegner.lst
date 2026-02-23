@@ -1,0 +1,815 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.1 #15267 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module gegner
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _v_gegner_kolision
+                                     11 	.globl _p_engine_calcCoord
+                                     12 	.globl _p_gegner_init
+                                     13 	.globl _p_gegner_set
+                                     14 	.globl _p_gegner_move
+                                     15 	.globl _p_gegner_unset
+                                     16 	.globl _p_gegner_lvlset
+                                     17 ;--------------------------------------------------------
+                                     18 ; special function registers
+                                     19 ;--------------------------------------------------------
+                                     20 	.area _HRAM
+                                     21 ;--------------------------------------------------------
+                                     22 ; ram data
+                                     23 ;--------------------------------------------------------
+                                     24 	.area _DATA
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area _INITIALIZED
+                                     29 ;--------------------------------------------------------
+                                     30 ; absolute external ram data
+                                     31 ;--------------------------------------------------------
+                                     32 	.area _DABS (ABS)
+                                     33 ;--------------------------------------------------------
+                                     34 ; global & static initialisations
+                                     35 ;--------------------------------------------------------
+                                     36 	.area _HOME
+                                     37 	.area _GSINIT
+                                     38 	.area _GSFINAL
+                                     39 	.area _GSINIT
+                                     40 ;--------------------------------------------------------
+                                     41 ; Home
+                                     42 ;--------------------------------------------------------
+                                     43 	.area _HOME
+                                     44 ;gegner.c:26: void p_gegner_init (void) __nonbanked
+                                     45 ;	---------------------------------
+                                     46 ; Function p_gegner_init
+                                     47 ; ---------------------------------
+    00000000                         48 _p_gegner_init::
+                                     49 ;gegner.c:29: }
+    00000000 C9               [16]   50 	ret
+                                     51 ;gegner.c:39: void p_gegner_set (uint8_t l_nr, uint8_t l_sprnr, uint8_t l_xk, uint8_t l_yk, uint8_t l_lp, uint8_t l_ri) __nonbanked
+                                     52 ;	---------------------------------
+                                     53 ; Function p_gegner_set
+                                     54 ; ---------------------------------
+    00000001                         55 _p_gegner_set::
+    00000001 E8 FC            [16]   56 	add	sp, #-4
+    00000003 4F               [ 4]   57 	ld	c, a
+    00000004 43               [ 4]   58 	ld	b, e
+                                     59 ;/opt/gbdk/include/gb/gb.h:1887: shadow_OAM[nb].tile=tile;
+    00000005 59               [ 4]   60 	ld	e, c
+    00000006 16 00            [ 8]   61 	ld	d, #0x00
+    00000008 CB 23            [ 8]   62 	sla	e
+    0000000A CB 12            [ 8]   63 	rl	d
+    0000000C CB 23            [ 8]   64 	sla	e
+    0000000E CB 12            [ 8]   65 	rl	d
+    00000010 33               [ 8]   66 	inc	sp
+    00000011 33               [ 8]   67 	inc	sp
+    00000012 6B               [ 4]   68 	ld	l, e
+    00000013 62               [ 4]   69 	ld	h, d
+    00000014 11r00r00         [12]   70 	ld	de, #_shadow_OAM
+    00000017 E5               [16]   71 	push	hl
+    00000018 19               [ 8]   72 	add	hl, de
+    00000019 23               [ 8]   73 	inc	hl
+    0000001A 23               [ 8]   74 	inc	hl
+    0000001B 5D               [ 4]   75 	ld	e, l
+    0000001C 54               [ 4]   76 	ld	d, h
+    0000001D 78               [ 4]   77 	ld	a, b
+    0000001E 12               [ 8]   78 	ld	(de), a
+                                     79 ;gegner.c:42: v_gxk [l_nr] = l_xk; v_gyk [l_nr] = l_yk; v_glp [l_nr] = l_lp; v_gri [l_nr] = l_ri;
+    0000001F 11r00r00         [12]   80 	ld	de, #_v_gxk
+    00000022 69               [ 4]   81 	ld	l, c
+    00000023 26 00            [ 8]   82 	ld	h, #0x00
+    00000025 19               [ 8]   83 	add	hl, de
+    00000026 E5               [16]   84 	push	hl
+    00000027 7D               [ 4]   85 	ld	a, l
+    00000028 F8 04            [12]   86 	ldhl	sp,	#4
+    0000002A 77               [ 8]   87 	ld	(hl), a
+    0000002B E1               [12]   88 	pop	hl
+    0000002C 7C               [ 4]   89 	ld	a, h
+    0000002D F8 03            [12]   90 	ldhl	sp,	#3
+    0000002F 32               [ 8]   91 	ld	(hl-), a
+    00000030 2A               [ 8]   92 	ld	a, (hl+)
+    00000031 5F               [ 4]   93 	ld	e, a
+    00000032 56               [ 8]   94 	ld	d, (hl)
+    00000033 F8 06            [12]   95 	ldhl	sp,	#6
+    00000035 2A               [ 8]   96 	ld	a, (hl+)
+    00000036 12               [ 8]   97 	ld	(de), a
+    00000037 3Er00            [ 8]   98 	ld	a, #<(_v_gyk)
+    00000039 81               [ 4]   99 	add	a, c
+    0000003A 5F               [ 4]  100 	ld	e, a
+    0000003B 3Es00            [ 8]  101 	ld	a, #>(_v_gyk)
+    0000003D CE 00            [ 8]  102 	adc	a, #0x00
+    0000003F 57               [ 4]  103 	ld	d, a
+    00000040 7E               [ 8]  104 	ld	a, (hl)
+    00000041 12               [ 8]  105 	ld	(de), a
+    00000042 21r00r00         [12]  106 	ld	hl, #_v_glp
+    00000045 06 00            [ 8]  107 	ld	b, #0x00
+    00000047 09               [ 8]  108 	add	hl, bc
+    00000048 E5               [16]  109 	push	hl
+    00000049 F8 0A            [12]  110 	ldhl	sp,	#10
+    0000004B 7E               [ 8]  111 	ld	a, (hl)
+    0000004C E1               [12]  112 	pop	hl
+    0000004D 77               [ 8]  113 	ld	(hl), a
+    0000004E 21r00r00         [12]  114 	ld	hl, #_v_gri
+    00000051 06 00            [ 8]  115 	ld	b, #0x00
+    00000053 09               [ 8]  116 	add	hl, bc
+    00000054 E5               [16]  117 	push	hl
+    00000055 F8 0B            [12]  118 	ldhl	sp,	#11
+    00000057 7E               [ 8]  119 	ld	a, (hl)
+    00000058 E1               [12]  120 	pop	hl
+    00000059 77               [ 8]  121 	ld	(hl), a
+                                    122 ;gegner.c:43: move_sprite (l_nr, v_gxk [l_nr], v_gyk [l_nr]);
+    0000005A 1A               [ 8]  123 	ld	a, (de)
+    0000005B 47               [ 4]  124 	ld	b, a
+    0000005C F8 02            [12]  125 	ldhl	sp,#2
+    0000005E 2A               [ 8]  126 	ld	a, (hl+)
+    0000005F 5F               [ 4]  127 	ld	e, a
+    00000060 56               [ 8]  128 	ld	d, (hl)
+    00000061 1A               [ 8]  129 	ld	a, (de)
+    00000062 4F               [ 4]  130 	ld	c, a
+                                    131 ;/opt/gbdk/include/gb/gb.h:1973: OAM_item_t * itm = &shadow_OAM[nb];
+    00000063 11r00r00         [12]  132 	ld	de, #_shadow_OAM+0
+    00000066 E1               [12]  133 	pop	hl
+    00000067 E5               [16]  134 	push	hl
+    00000068 19               [ 8]  135 	add	hl, de
+    00000069 5D               [ 4]  136 	ld	e, l
+    0000006A 54               [ 4]  137 	ld	d, h
+                                    138 ;/opt/gbdk/include/gb/gb.h:1974: itm->y=y, itm->x=x;
+    0000006B 78               [ 4]  139 	ld	a, b
+    0000006C 12               [ 8]  140 	ld	(de), a
+    0000006D 13               [ 8]  141 	inc	de
+    0000006E 79               [ 4]  142 	ld	a, c
+    0000006F 12               [ 8]  143 	ld	(de), a
+                                    144 ;gegner.c:44: v_gegnertimer = 0;
+    00000070 AF               [ 4]  145 	xor	a, a
+    00000071 EAr00r00         [16]  146 	ld	(#_v_gegnertimer),a
+                                    147 ;gegner.c:45: }
+    00000074 E8 04            [16]  148 	add	sp, #4
+    00000076 E1               [12]  149 	pop	hl
+    00000077 E8 04            [16]  150 	add	sp, #4
+    00000079 E9               [ 4]  151 	jp	(hl)
+                                    152 ;gegner.c:48: uint8_t v_gegner_kolision (unsigned char l_tile) __nonbanked
+                                    153 ;	---------------------------------
+                                    154 ; Function v_gegner_kolision
+                                    155 ; ---------------------------------
+    0000007A                        156 _v_gegner_kolision::
+    0000007A 4F               [ 4]  157 	ld	c, a
+                                    158 ;gegner.c:52: for (l_i = 0; l_i != sizeof (v_kolidat) + 1; l_i++) {
+    0000007B 16 00            [ 8]  159 	ld	d, #0x00
+    0000007D                        160 00104$:
+                                    161 ;gegner.c:53: if (l_tile == v_kolidat [l_i]) return FALSE;
+    0000007D 3Er00            [ 8]  162 	ld	a, #<(_v_kolidat)
+    0000007F 82               [ 4]  163 	add	a, d
+    00000080 6F               [ 4]  164 	ld	l, a
+    00000081 3Es00            [ 8]  165 	ld	a, #>(_v_kolidat)
+    00000083 CE 00            [ 8]  166 	adc	a, #0x00
+    00000085 67               [ 4]  167 	ld	h, a
+    00000086 7E               [ 8]  168 	ld	a, (hl)
+    00000087 91               [ 4]  169 	sub	a, c
+    00000088 20 02            [12]  170 	jr	NZ, 00105$
+    0000008A AF               [ 4]  171 	xor	a, a
+    0000008B C9               [16]  172 	ret
+    0000008C                        173 00105$:
+                                    174 ;gegner.c:52: for (l_i = 0; l_i != sizeof (v_kolidat) + 1; l_i++) {
+    0000008C 14               [ 4]  175 	inc	d
+    0000008D 7A               [ 4]  176 	ld	a, d
+    0000008E D6 05            [ 8]  177 	sub	a, #0x05
+    00000090 20 EB            [12]  178 	jr	NZ, 00104$
+                                    179 ;gegner.c:56: return TRUE;
+    00000092 3E 01            [ 8]  180 	ld	a, #0x01
+                                    181 ;gegner.c:57: }
+    00000094 C9               [16]  182 	ret
+                                    183 ;gegner.c:60: void p_gegner_move (void) __nonbanked
+                                    184 ;	---------------------------------
+                                    185 ; Function p_gegner_move
+                                    186 ; ---------------------------------
+    00000095                        187 _p_gegner_move::
+    00000095 E8 F9            [16]  188 	add	sp, #-7
+                                    189 ;gegner.c:63: uint8_t l_walk = TRUE;
+    00000097 F8 00            [12]  190 	ldhl	sp,	#0
+    00000099 36 01            [12]  191 	ld	(hl), #0x01
+                                    192 ;gegner.c:65: v_gegnertimer = 0;
+    0000009B AF               [ 4]  193 	xor	a, a
+    0000009C EAr00r00         [16]  194 	ld	(#_v_gegnertimer),a
+                                    195 ;gegner.c:67: for (l_i = 2; l_i <= 4; l_i++) {
+    0000009F F8 06            [12]  196 	ldhl	sp,	#6
+    000000A1 36 02            [12]  197 	ld	(hl), #0x02
+    000000A3                        198 00141$:
+                                    199 ;gegner.c:68: v_gmk [l_i] = p_engine_calcCoord (v_gxk [l_i], v_gyk [l_i]);
+    000000A3 11r00r00         [12]  200 	ld	de, #_v_gmk
+    000000A6 F8 06            [12]  201 	ldhl	sp,	#6
+    000000A8 6E               [ 8]  202 	ld	l, (hl)
+    000000A9 26 00            [ 8]  203 	ld	h, #0x00
+    000000AB 19               [ 8]  204 	add	hl, de
+    000000AC 4D               [ 4]  205 	ld	c, l
+    000000AD 44               [ 4]  206 	ld	b, h
+    000000AE 11r00r00         [12]  207 	ld	de, #_v_gyk
+    000000B1 F8 06            [12]  208 	ldhl	sp,	#6
+    000000B3 6E               [ 8]  209 	ld	l, (hl)
+    000000B4 26 00            [ 8]  210 	ld	h, #0x00
+    000000B6 19               [ 8]  211 	add	hl, de
+    000000B7 E5               [16]  212 	push	hl
+    000000B8 7D               [ 4]  213 	ld	a, l
+    000000B9 F8 03            [12]  214 	ldhl	sp,	#3
+    000000BB 77               [ 8]  215 	ld	(hl), a
+    000000BC E1               [12]  216 	pop	hl
+    000000BD 7C               [ 4]  217 	ld	a, h
+    000000BE F8 02            [12]  218 	ldhl	sp,	#2
+    000000C0 32               [ 8]  219 	ld	(hl-), a
+    000000C1 2A               [ 8]  220 	ld	a, (hl+)
+    000000C2 5F               [ 4]  221 	ld	e, a
+    000000C3 56               [ 8]  222 	ld	d, (hl)
+    000000C4 1A               [ 8]  223 	ld	a, (de)
+    000000C5 F8 05            [12]  224 	ldhl	sp,	#5
+    000000C7 22               [ 8]  225 	ld	(hl+), a
+    000000C8 11r00r00         [12]  226 	ld	de, #_v_gxk
+    000000CB 6E               [ 8]  227 	ld	l, (hl)
+    000000CC 26 00            [ 8]  228 	ld	h, #0x00
+    000000CE 19               [ 8]  229 	add	hl, de
+    000000CF E5               [16]  230 	push	hl
+    000000D0 7D               [ 4]  231 	ld	a, l
+    000000D1 F8 05            [12]  232 	ldhl	sp,	#5
+    000000D3 77               [ 8]  233 	ld	(hl), a
+    000000D4 E1               [12]  234 	pop	hl
+    000000D5 7C               [ 4]  235 	ld	a, h
+    000000D6 F8 04            [12]  236 	ldhl	sp,	#4
+    000000D8 32               [ 8]  237 	ld	(hl-), a
+    000000D9 2A               [ 8]  238 	ld	a, (hl+)
+    000000DA 5F               [ 4]  239 	ld	e, a
+    000000DB 2A               [ 8]  240 	ld	a, (hl+)
+    000000DC 57               [ 4]  241 	ld	d, a
+    000000DD 1A               [ 8]  242 	ld	a, (de)
+    000000DE C5               [16]  243 	push	bc
+    000000DF 5E               [ 8]  244 	ld	e, (hl)
+    000000E0 CDr00r00         [24]  245 	call	_p_engine_calcCoord
+    000000E3 C1               [12]  246 	pop	bc
+    000000E4 02               [ 8]  247 	ld	(bc), a
+                                    248 ;gegner.c:70: if (v_gri [l_i] == RIGHT) {
+    000000E5 11r00r00         [12]  249 	ld	de, #_v_gri
+    000000E8 F8 06            [12]  250 	ldhl	sp,	#6
+    000000EA 6E               [ 8]  251 	ld	l, (hl)
+    000000EB 26 00            [ 8]  252 	ld	h, #0x00
+    000000ED 19               [ 8]  253 	add	hl, de
+    000000EE 5D               [ 4]  254 	ld	e, l
+    000000EF 54               [ 4]  255 	ld	d, h
+    000000F0 1A               [ 8]  256 	ld	a, (de)
+    000000F1 F8 05            [12]  257 	ldhl	sp,	#5
+    000000F3 77               [ 8]  258 	ld	(hl), a
+    000000F4 7E               [ 8]  259 	ld	a, (hl)
+    000000F5 D6 04            [ 8]  260 	sub	a, #0x04
+    000000F7 20 14            [12]  261 	jr	NZ, 00110$
+                                    262 ;gegner.c:71: l_walk = v_gegner_kolision (v_lvldat [v_gmk [l_i] + 1]);
+    000000F9 0A               [ 8]  263 	ld	a, (bc)
+    000000FA 06 00            [ 8]  264 	ld	b, #0x00
+    000000FC 4F               [ 4]  265 	ld	c, a
+    000000FD 03               [ 8]  266 	inc	bc
+    000000FE 21r00r00         [12]  267 	ld	hl, #_v_lvldat
+    00000101 09               [ 8]  268 	add	hl, bc
+    00000102 7E               [ 8]  269 	ld	a, (hl)
+    00000103 D5               [16]  270 	push	de
+    00000104 CDr7Ar00         [24]  271 	call	_v_gegner_kolision
+    00000107 F8 02            [12]  272 	ldhl	sp,	#2
+    00000109 77               [ 8]  273 	ld	(hl), a
+    0000010A D1               [12]  274 	pop	de
+    0000010B 18 56            [12]  275 	jr	00111$
+    0000010D                        276 00110$:
+                                    277 ;gegner.c:73: else if (v_gri [l_i] == LEFT) {
+    0000010D F8 05            [12]  278 	ldhl	sp,	#5
+    0000010F 7E               [ 8]  279 	ld	a, (hl)
+    00000110 D6 03            [ 8]  280 	sub	a, #0x03
+    00000112 20 14            [12]  281 	jr	NZ, 00107$
+                                    282 ;gegner.c:74: l_walk = v_gegner_kolision (v_lvldat [v_gmk [l_i] - 1]);	
+    00000114 0A               [ 8]  283 	ld	a, (bc)
+    00000115 06 00            [ 8]  284 	ld	b, #0x00
+    00000117 4F               [ 4]  285 	ld	c, a
+    00000118 0B               [ 8]  286 	dec	bc
+    00000119 21r00r00         [12]  287 	ld	hl, #_v_lvldat
+    0000011C 09               [ 8]  288 	add	hl, bc
+    0000011D 7E               [ 8]  289 	ld	a, (hl)
+    0000011E D5               [16]  290 	push	de
+    0000011F CDr7Ar00         [24]  291 	call	_v_gegner_kolision
+    00000122 F8 02            [12]  292 	ldhl	sp,	#2
+    00000124 77               [ 8]  293 	ld	(hl), a
+    00000125 D1               [12]  294 	pop	de
+    00000126 18 3B            [12]  295 	jr	00111$
+    00000128                        296 00107$:
+                                    297 ;gegner.c:76: else if (v_gri [l_i] == UP) {
+    00000128 F8 05            [12]  298 	ldhl	sp,	#5
+    0000012A 7E               [ 8]  299 	ld	a, (hl)
+    0000012B 3D               [ 4]  300 	dec	a
+    0000012C 20 19            [12]  301 	jr	NZ, 00104$
+                                    302 ;gegner.c:77: l_walk = v_gegner_kolision (v_lvldat [v_gmk [l_i] - 18]);
+    0000012E 0A               [ 8]  303 	ld	a, (bc)
+    0000012F 0E 00            [ 8]  304 	ld	c, #0x00
+    00000131 C6 EE            [ 8]  305 	add	a, #0xee
+    00000133 6F               [ 4]  306 	ld	l, a
+    00000134 79               [ 4]  307 	ld	a, c
+    00000135 CE FF            [ 8]  308 	adc	a, #0xff
+    00000137 67               [ 4]  309 	ld	h, a
+    00000138 01r00r00         [12]  310 	ld	bc, #_v_lvldat
+    0000013B 09               [ 8]  311 	add	hl, bc
+    0000013C 7E               [ 8]  312 	ld	a, (hl)
+    0000013D D5               [16]  313 	push	de
+    0000013E CDr7Ar00         [24]  314 	call	_v_gegner_kolision
+    00000141 F8 02            [12]  315 	ldhl	sp,	#2
+    00000143 77               [ 8]  316 	ld	(hl), a
+    00000144 D1               [12]  317 	pop	de
+    00000145 18 1C            [12]  318 	jr	00111$
+    00000147                        319 00104$:
+                                    320 ;gegner.c:79: else if (v_gri [l_i] == DOWN) {
+    00000147 F8 05            [12]  321 	ldhl	sp,	#5
+    00000149 7E               [ 8]  322 	ld	a, (hl)
+    0000014A D6 02            [ 8]  323 	sub	a, #0x02
+    0000014C 20 15            [12]  324 	jr	NZ, 00111$
+                                    325 ;gegner.c:80: l_walk = v_gegner_kolision (v_lvldat [v_gmk [l_i] + 18]);
+    0000014E 0A               [ 8]  326 	ld	a, (bc)
+    0000014F 26 00            [ 8]  327 	ld	h, #0x00
+    00000151 6F               [ 4]  328 	ld	l, a
+    00000152 01 12 00         [12]  329 	ld	bc, #0x0012
+    00000155 09               [ 8]  330 	add	hl, bc
+    00000156 01r00r00         [12]  331 	ld	bc, #_v_lvldat
+    00000159 09               [ 8]  332 	add	hl, bc
+    0000015A 7E               [ 8]  333 	ld	a, (hl)
+    0000015B D5               [16]  334 	push	de
+    0000015C CDr7Ar00         [24]  335 	call	_v_gegner_kolision
+    0000015F F8 02            [12]  336 	ldhl	sp,	#2
+    00000161 77               [ 8]  337 	ld	(hl), a
+    00000162 D1               [12]  338 	pop	de
+    00000163                        339 00111$:
+                                    340 ;gegner.c:82: if (l_walk == TRUE) {
+    00000163 F8 00            [12]  341 	ldhl	sp,	#0
+    00000165 7E               [ 8]  342 	ld	a, (hl)
+    00000166 3D               [ 4]  343 	dec	a
+    00000167 20 6E            [12]  344 	jr	NZ, 00137$
+                                    345 ;gegner.c:83: if (v_gri [l_i] == RIGHT) v_gxk [l_i] += 8;
+    00000169 1A               [ 8]  346 	ld	a, (de)
+    0000016A FE 04            [ 8]  347 	cp	a, #0x04
+    0000016C 20 10            [12]  348 	jr	NZ, 00121$
+    0000016E F8 03            [12]  349 	ldhl	sp,#3
+    00000170 2A               [ 8]  350 	ld	a, (hl+)
+    00000171 5F               [ 4]  351 	ld	e, a
+    00000172 3A               [ 8]  352 	ld	a, (hl-)
+    00000173 57               [ 4]  353 	ld	d, a
+    00000174 1A               [ 8]  354 	ld	a, (de)
+    00000175 C6 08            [ 8]  355 	add	a, #0x08
+    00000177 5E               [ 8]  356 	ld	e, (hl)
+    00000178 23               [ 8]  357 	inc	hl
+    00000179 66               [ 8]  358 	ld	h, (hl)
+    0000017A 6B               [ 4]  359 	ld	l, e
+    0000017B 77               [ 8]  360 	ld	(hl), a
+    0000017C 18 3A            [12]  361 	jr	00122$
+    0000017E                        362 00121$:
+                                    363 ;gegner.c:84: else if (v_gri [l_i] == LEFT) v_gxk [l_i] -= 8;
+    0000017E FE 03            [ 8]  364 	cp	a, #0x03
+    00000180 20 10            [12]  365 	jr	NZ, 00118$
+    00000182 F8 03            [12]  366 	ldhl	sp,#3
+    00000184 2A               [ 8]  367 	ld	a, (hl+)
+    00000185 5F               [ 4]  368 	ld	e, a
+    00000186 3A               [ 8]  369 	ld	a, (hl-)
+    00000187 57               [ 4]  370 	ld	d, a
+    00000188 1A               [ 8]  371 	ld	a, (de)
+    00000189 C6 F8            [ 8]  372 	add	a, #0xf8
+    0000018B 5E               [ 8]  373 	ld	e, (hl)
+    0000018C 23               [ 8]  374 	inc	hl
+    0000018D 66               [ 8]  375 	ld	h, (hl)
+    0000018E 6B               [ 4]  376 	ld	l, e
+    0000018F 77               [ 8]  377 	ld	(hl), a
+    00000190 18 26            [12]  378 	jr	00122$
+    00000192                        379 00118$:
+                                    380 ;gegner.c:68: v_gmk [l_i] = p_engine_calcCoord (v_gxk [l_i], v_gyk [l_i]);
+    00000192 F8 01            [12]  381 	ldhl	sp,#1
+    00000194 5E               [ 8]  382 	ld	e, (hl)
+    00000195 23               [ 8]  383 	inc	hl
+    00000196 56               [ 8]  384 	ld	d, (hl)
+    00000197 F5               [16]  385 	push	af
+    00000198 1A               [ 8]  386 	ld	a, (de)
+    00000199 4F               [ 4]  387 	ld	c, a
+    0000019A F1               [12]  388 	pop	af
+                                    389 ;gegner.c:85: else if (v_gri [l_i] == UP) v_gyk [l_i] -= 8;
+    0000019B FE 01            [ 8]  390 	cp	a, #0x01
+    0000019D 20 0B            [12]  391 	jr	NZ, 00115$
+    0000019F 2B               [ 8]  392 	dec	hl
+    000001A0 79               [ 4]  393 	ld	a, c
+    000001A1 C6 F8            [ 8]  394 	add	a, #0xf8
+    000001A3 5E               [ 8]  395 	ld	e, (hl)
+    000001A4 23               [ 8]  396 	inc	hl
+    000001A5 66               [ 8]  397 	ld	h, (hl)
+    000001A6 6B               [ 4]  398 	ld	l, e
+    000001A7 77               [ 8]  399 	ld	(hl), a
+    000001A8 18 0E            [12]  400 	jr	00122$
+    000001AA                        401 00115$:
+                                    402 ;gegner.c:86: else if (v_gri [l_i] == DOWN) v_gyk [l_i] += 8;
+    000001AA D6 02            [ 8]  403 	sub	a, #0x02
+    000001AC 20 0A            [12]  404 	jr	NZ, 00122$
+    000001AE 79               [ 4]  405 	ld	a, c
+    000001AF C6 08            [ 8]  406 	add	a, #0x08
+    000001B1 F8 01            [12]  407 	ldhl	sp,	#1
+    000001B3 5E               [ 8]  408 	ld	e, (hl)
+    000001B4 23               [ 8]  409 	inc	hl
+    000001B5 66               [ 8]  410 	ld	h, (hl)
+    000001B6 6B               [ 4]  411 	ld	l, e
+    000001B7 77               [ 8]  412 	ld	(hl), a
+    000001B8                        413 00122$:
+                                    414 ;gegner.c:88: move_sprite (l_i, v_gxk [l_i], v_gyk [l_i]);
+    000001B8 F8 01            [12]  415 	ldhl	sp,#1
+    000001BA 2A               [ 8]  416 	ld	a, (hl+)
+    000001BB 5F               [ 4]  417 	ld	e, a
+    000001BC 2A               [ 8]  418 	ld	a, (hl+)
+    000001BD 57               [ 4]  419 	ld	d, a
+    000001BE 1A               [ 8]  420 	ld	a, (de)
+    000001BF 47               [ 4]  421 	ld	b, a
+    000001C0 2A               [ 8]  422 	ld	a, (hl+)
+    000001C1 5F               [ 4]  423 	ld	e, a
+                                    424 ;/opt/gbdk/include/gb/gb.h:1973: OAM_item_t * itm = &shadow_OAM[nb];
+    000001C2 2A               [ 8]  425 	ld	a, (hl+)
+    000001C3 23               [ 8]  426 	inc	hl
+    000001C4 57               [ 4]  427 	ld	d, a
+    000001C5 1A               [ 8]  428 	ld	a, (de)
+    000001C6 4F               [ 4]  429 	ld	c, a
+    000001C7 5E               [ 8]  430 	ld	e, (hl)
+    000001C8 16 00            [ 8]  431 	ld	d, #0x00
+    000001CA 6B               [ 4]  432 	ld	l, e
+    000001CB 62               [ 4]  433 	ld	h, d
+    000001CC 29               [ 8]  434 	add	hl, hl
+    000001CD 29               [ 8]  435 	add	hl, hl
+    000001CE 11r00r00         [12]  436 	ld	de, #_shadow_OAM
+    000001D1 19               [ 8]  437 	add	hl, de
+                                    438 ;/opt/gbdk/include/gb/gb.h:1974: itm->y=y, itm->x=x;
+    000001D2 78               [ 4]  439 	ld	a, b
+    000001D3 22               [ 8]  440 	ld	(hl+), a
+    000001D4 71               [ 8]  441 	ld	(hl), c
+                                    442 ;gegner.c:88: move_sprite (l_i, v_gxk [l_i], v_gyk [l_i]);
+    000001D5 18 29            [12]  443 	jr	00142$
+    000001D7                        444 00137$:
+                                    445 ;gegner.c:90: else if (l_walk == FALSE) {
+    000001D7 F8 00            [12]  446 	ldhl	sp,	#0
+    000001D9 7E               [ 8]  447 	ld	a, (hl)
+    000001DA B7               [ 4]  448 	or	a, a
+    000001DB 20 23            [12]  449 	jr	NZ, 00142$
+                                    450 ;gegner.c:91: if (v_gri [l_i] == RIGHT) v_gri [l_i] = LEFT;
+    000001DD 1A               [ 8]  451 	ld	a, (de)
+    000001DE FE 04            [ 8]  452 	cp	a, #0x04
+    000001E0 20 05            [12]  453 	jr	NZ, 00132$
+    000001E2 3E 03            [ 8]  454 	ld	a, #0x03
+    000001E4 12               [ 8]  455 	ld	(de), a
+    000001E5 18 19            [12]  456 	jr	00142$
+    000001E7                        457 00132$:
+                                    458 ;gegner.c:92: else if (v_gri [l_i] == LEFT) v_gri [l_i] = RIGHT;
+    000001E7 FE 03            [ 8]  459 	cp	a, #0x03
+    000001E9 20 05            [12]  460 	jr	NZ, 00129$
+    000001EB 3E 04            [ 8]  461 	ld	a, #0x04
+    000001ED 12               [ 8]  462 	ld	(de), a
+    000001EE 18 10            [12]  463 	jr	00142$
+    000001F0                        464 00129$:
+                                    465 ;gegner.c:93: else if (v_gri [l_i] == UP) v_gri [l_i] = DOWN;
+    000001F0 FE 01            [ 8]  466 	cp	a, #0x01
+    000001F2 20 05            [12]  467 	jr	NZ, 00126$
+    000001F4 3E 02            [ 8]  468 	ld	a, #0x02
+    000001F6 12               [ 8]  469 	ld	(de), a
+    000001F7 18 07            [12]  470 	jr	00142$
+    000001F9                        471 00126$:
+                                    472 ;gegner.c:94: else if (v_gri [l_i] == DOWN) v_gri [l_i] = UP;
+    000001F9 D6 02            [ 8]  473 	sub	a, #0x02
+    000001FB 20 03            [12]  474 	jr	NZ, 00142$
+    000001FD 3E 01            [ 8]  475 	ld	a, #0x01
+    000001FF 12               [ 8]  476 	ld	(de), a
+    00000200                        477 00142$:
+                                    478 ;gegner.c:67: for (l_i = 2; l_i <= 4; l_i++) {
+    00000200 F8 06            [12]  479 	ldhl	sp,	#6
+    00000202 34               [12]  480 	inc	(hl)
+    00000203 3E 04            [ 8]  481 	ld	a, #0x04
+    00000205 96               [ 8]  482 	sub	a, (hl)
+    00000206 D2rA3r00         [16]  483 	jp	NC, 00141$
+                                    484 ;gegner.c:97: } 
+    00000209 E8 07            [16]  485 	add	sp, #7
+    0000020B C9               [16]  486 	ret
+                                    487 ;gegner.c:100: void p_gegner_unset (void) __nonbanked
+                                    488 ;	---------------------------------
+                                    489 ; Function p_gegner_unset
+                                    490 ; ---------------------------------
+    0000020C                        491 _p_gegner_unset::
+                                    492 ;gegner.c:102: v_gegnertimer = 255;
+    0000020C 21r00r00         [12]  493 	ld	hl, #_v_gegnertimer
+    0000020F 36 FF            [12]  494 	ld	(hl), #0xff
+                                    495 ;gegner.c:104: p_gegner_set (2, 0, 0, 0, 0, QUIT);
+    00000211 AF               [ 4]  496 	xor	a, a
+    00000212 0F               [ 4]  497 	rrca
+    00000213 F5               [16]  498 	push	af
+    00000214 AF               [ 4]  499 	xor	a, a
+    00000215 0F               [ 4]  500 	rrca
+    00000216 F5               [16]  501 	push	af
+    00000217 1E 00            [ 8]  502 	ld	e, #0x00
+    00000219 3E 02            [ 8]  503 	ld	a, #0x02
+    0000021B CDr01r00         [24]  504 	call	_p_gegner_set
+                                    505 ;gegner.c:105: p_gegner_set (3, 0, 0, 0, 0, QUIT);
+    0000021E AF               [ 4]  506 	xor	a, a
+    0000021F 0F               [ 4]  507 	rrca
+    00000220 F5               [16]  508 	push	af
+    00000221 AF               [ 4]  509 	xor	a, a
+    00000222 0F               [ 4]  510 	rrca
+    00000223 F5               [16]  511 	push	af
+    00000224 1E 00            [ 8]  512 	ld	e, #0x00
+    00000226 3E 03            [ 8]  513 	ld	a, #0x03
+    00000228 CDr01r00         [24]  514 	call	_p_gegner_set
+                                    515 ;gegner.c:106: p_gegner_set (4, 0, 0, 0, 0, QUIT);
+    0000022B AF               [ 4]  516 	xor	a, a
+    0000022C 0F               [ 4]  517 	rrca
+    0000022D F5               [16]  518 	push	af
+    0000022E AF               [ 4]  519 	xor	a, a
+    0000022F 0F               [ 4]  520 	rrca
+    00000230 F5               [16]  521 	push	af
+    00000231 1E 00            [ 8]  522 	ld	e, #0x00
+    00000233 3E 04            [ 8]  523 	ld	a, #0x04
+    00000235 CDr01r00         [24]  524 	call	_p_gegner_set
+                                    525 ;gegner.c:107: }
+    00000238 C9               [16]  526 	ret
+                                    527 ;gegner.c:110: void p_gegner_lvlset (void) __nonbanked
+                                    528 ;	---------------------------------
+                                    529 ; Function p_gegner_lvlset
+                                    530 ; ---------------------------------
+    00000239                        531 _p_gegner_lvlset::
+                                    532 ;gegner.c:112: p_gegner_unset ();
+    00000239 CDr0Cr02         [24]  533 	call	_p_gegner_unset
+                                    534 ;gegner.c:114: if (v_room == 3) {
+    0000023C FAr00r00         [16]  535 	ld	a, (#_v_room)
+    0000023F D6 03            [ 8]  536 	sub	a, #0x03
+    00000241 20 1F            [12]  537 	jr	NZ, 00131$
+                                    538 ;gegner.c:115: p_gegner_set (2, 1, 144, 80, 1, LEFT);
+    00000243 21 01 03         [12]  539 	ld	hl, #0x301
+    00000246 E5               [16]  540 	push	hl
+    00000247 21 90 50         [12]  541 	ld	hl, #0x5090
+    0000024A E5               [16]  542 	push	hl
+    0000024B 1E 01            [ 8]  543 	ld	e, #0x01
+    0000024D 3E 02            [ 8]  544 	ld	a, #0x02
+    0000024F CDr01r00         [24]  545 	call	_p_gegner_set
+                                    546 ;gegner.c:116: p_gegner_set (3, 1, 24, 40, 1, RIGHT);
+    00000252 21 01 04         [12]  547 	ld	hl, #0x401
+    00000255 E5               [16]  548 	push	hl
+    00000256 21 18 28         [12]  549 	ld	hl, #0x2818
+    00000259 E5               [16]  550 	push	hl
+    0000025A 1E 01            [ 8]  551 	ld	e, #0x01
+    0000025C 3E 03            [ 8]  552 	ld	a, #0x03
+    0000025E CDr01r00         [24]  553 	call	_p_gegner_set
+    00000261 C9               [16]  554 	ret
+    00000262                        555 00131$:
+                                    556 ;gegner.c:118: else if (v_room == 4) {
+    00000262 FAr00r00         [16]  557 	ld	a, (#_v_room)
+    00000265 D6 04            [ 8]  558 	sub	a, #0x04
+    00000267 20 2E            [12]  559 	jr	NZ, 00128$
+                                    560 ;gegner.c:119: p_gegner_set (2, 1, 48, 32, 1, UP);
+    00000269 21 01 01         [12]  561 	ld	hl, #0x101
+    0000026C E5               [16]  562 	push	hl
+    0000026D 21 30 20         [12]  563 	ld	hl, #0x2030
+    00000270 E5               [16]  564 	push	hl
+    00000271 1E 01            [ 8]  565 	ld	e, #0x01
+    00000273 3E 02            [ 8]  566 	ld	a, #0x02
+    00000275 CDr01r00         [24]  567 	call	_p_gegner_set
+                                    568 ;gegner.c:120: p_gegner_set (3, 1, 88, 72, 1, DOWN);
+    00000278 21 01 02         [12]  569 	ld	hl, #0x201
+    0000027B E5               [16]  570 	push	hl
+    0000027C 21 58 48         [12]  571 	ld	hl, #0x4858
+    0000027F E5               [16]  572 	push	hl
+    00000280 1E 01            [ 8]  573 	ld	e, #0x01
+    00000282 3E 03            [ 8]  574 	ld	a, #0x03
+    00000284 CDr01r00         [24]  575 	call	_p_gegner_set
+                                    576 ;gegner.c:121: p_gegner_set (4, 1, 144, 64, 1, LEFT);	
+    00000287 21 01 03         [12]  577 	ld	hl, #0x301
+    0000028A E5               [16]  578 	push	hl
+    0000028B 21 90 40         [12]  579 	ld	hl, #0x4090
+    0000028E E5               [16]  580 	push	hl
+    0000028F 1E 01            [ 8]  581 	ld	e, #0x01
+    00000291 3E 04            [ 8]  582 	ld	a, #0x04
+    00000293 CDr01r00         [24]  583 	call	_p_gegner_set
+    00000296 C9               [16]  584 	ret
+    00000297                        585 00128$:
+                                    586 ;gegner.c:123: else if (v_room == 5) {
+    00000297 FAr00r00         [16]  587 	ld	a, (#_v_room)
+    0000029A D6 05            [ 8]  588 	sub	a, #0x05
+    0000029C 20 1F            [12]  589 	jr	NZ, 00125$
+                                    590 ;gegner.c:124: p_gegner_set (2, 1, 136, 32, 1, DOWN);
+    0000029E 21 01 02         [12]  591 	ld	hl, #0x201
+    000002A1 E5               [16]  592 	push	hl
+    000002A2 21 88 20         [12]  593 	ld	hl, #0x2088
+    000002A5 E5               [16]  594 	push	hl
+    000002A6 1E 01            [ 8]  595 	ld	e, #0x01
+    000002A8 3E 02            [ 8]  596 	ld	a, #0x02
+    000002AA CDr01r00         [24]  597 	call	_p_gegner_set
+                                    598 ;gegner.c:125: p_gegner_set (3, 1, 40, 112, 1, UP);
+    000002AD 21 01 01         [12]  599 	ld	hl, #0x101
+    000002B0 E5               [16]  600 	push	hl
+    000002B1 21 28 70         [12]  601 	ld	hl, #0x7028
+    000002B4 E5               [16]  602 	push	hl
+    000002B5 1E 01            [ 8]  603 	ld	e, #0x01
+    000002B7 3E 03            [ 8]  604 	ld	a, #0x03
+    000002B9 CDr01r00         [24]  605 	call	_p_gegner_set
+    000002BC C9               [16]  606 	ret
+    000002BD                        607 00125$:
+                                    608 ;gegner.c:127: else if (v_room == 6) {
+    000002BD FAr00r00         [16]  609 	ld	a, (#_v_room)
+    000002C0 D6 06            [ 8]  610 	sub	a, #0x06
+    000002C2 20 10            [12]  611 	jr	NZ, 00122$
+                                    612 ;gegner.c:128: p_gegner_set (2, 1, 40, 112, 1, DOWN);
+    000002C4 21 01 02         [12]  613 	ld	hl, #0x201
+    000002C7 E5               [16]  614 	push	hl
+    000002C8 21 28 70         [12]  615 	ld	hl, #0x7028
+    000002CB E5               [16]  616 	push	hl
+    000002CC 1E 01            [ 8]  617 	ld	e, #0x01
+    000002CE 3E 02            [ 8]  618 	ld	a, #0x02
+    000002D0 CDr01r00         [24]  619 	call	_p_gegner_set
+    000002D3 C9               [16]  620 	ret
+    000002D4                        621 00122$:
+                                    622 ;gegner.c:130: else if (v_room == 7) {
+    000002D4 FAr00r00         [16]  623 	ld	a, (#_v_room)
+    000002D7 D6 07            [ 8]  624 	sub	a, #0x07
+    000002D9 20 1F            [12]  625 	jr	NZ, 00119$
+                                    626 ;gegner.c:131: p_gegner_set (2, 1, 64, 32, 1, DOWN);
+    000002DB 21 01 02         [12]  627 	ld	hl, #0x201
+    000002DE E5               [16]  628 	push	hl
+    000002DF 21 40 20         [12]  629 	ld	hl, #0x2040
+    000002E2 E5               [16]  630 	push	hl
+    000002E3 1E 01            [ 8]  631 	ld	e, #0x01
+    000002E5 3E 02            [ 8]  632 	ld	a, #0x02
+    000002E7 CDr01r00         [24]  633 	call	_p_gegner_set
+                                    634 ;gegner.c:132: p_gegner_set (3, 1, 112, 120, 1, UP);
+    000002EA 21 01 01         [12]  635 	ld	hl, #0x101
+    000002ED E5               [16]  636 	push	hl
+    000002EE 21 70 78         [12]  637 	ld	hl, #0x7870
+    000002F1 E5               [16]  638 	push	hl
+    000002F2 1E 01            [ 8]  639 	ld	e, #0x01
+    000002F4 3E 03            [ 8]  640 	ld	a, #0x03
+    000002F6 CDr01r00         [24]  641 	call	_p_gegner_set
+    000002F9 C9               [16]  642 	ret
+    000002FA                        643 00119$:
+                                    644 ;gegner.c:134: else if (v_room == 8) {
+    000002FA FAr00r00         [16]  645 	ld	a, (#_v_room)
+    000002FD D6 08            [ 8]  646 	sub	a, #0x08
+    000002FF 20 1E            [12]  647 	jr	NZ, 00116$
+                                    648 ;gegner.c:135: p_gegner_set (2, 2, 112, 120, 1, UP);
+    00000301 21 01 01         [12]  649 	ld	hl, #0x101
+    00000304 E5               [16]  650 	push	hl
+    00000305 21 70 78         [12]  651 	ld	hl, #0x7870
+    00000308 E5               [16]  652 	push	hl
+    00000309 3E 02            [ 8]  653 	ld	a,#0x02
+    0000030B 5F               [ 4]  654 	ld	e,a
+    0000030C CDr01r00         [24]  655 	call	_p_gegner_set
+                                    656 ;gegner.c:136: p_gegner_set (3, 2, 40, 56, 1, DOWN);
+    0000030F 21 01 02         [12]  657 	ld	hl, #0x201
+    00000312 E5               [16]  658 	push	hl
+    00000313 21 28 38         [12]  659 	ld	hl, #0x3828
+    00000316 E5               [16]  660 	push	hl
+    00000317 1E 02            [ 8]  661 	ld	e, #0x02
+    00000319 3E 03            [ 8]  662 	ld	a, #0x03
+    0000031B CDr01r00         [24]  663 	call	_p_gegner_set
+    0000031E C9               [16]  664 	ret
+    0000031F                        665 00116$:
+                                    666 ;gegner.c:138: else if (v_room == 9)  {
+    0000031F FAr00r00         [16]  667 	ld	a, (#_v_room)
+    00000322 D6 09            [ 8]  668 	sub	a, #0x09
+    00000324 20 1E            [12]  669 	jr	NZ, 00113$
+                                    670 ;gegner.c:139: p_gegner_set (2, 2, 80, 56, 1, LEFT);
+    00000326 21 01 03         [12]  671 	ld	hl, #0x301
+    00000329 E5               [16]  672 	push	hl
+    0000032A 21 50 38         [12]  673 	ld	hl, #0x3850
+    0000032D E5               [16]  674 	push	hl
+    0000032E 3E 02            [ 8]  675 	ld	a,#0x02
+    00000330 5F               [ 4]  676 	ld	e,a
+    00000331 CDr01r00         [24]  677 	call	_p_gegner_set
+                                    678 ;gegner.c:140: p_gegner_set (3, 2, 136, 112, 2, RIGHT);	
+    00000334 21 02 04         [12]  679 	ld	hl, #0x402
+    00000337 E5               [16]  680 	push	hl
+    00000338 21 88 70         [12]  681 	ld	hl, #0x7088
+    0000033B E5               [16]  682 	push	hl
+    0000033C 1E 02            [ 8]  683 	ld	e, #0x02
+    0000033E 3E 03            [ 8]  684 	ld	a, #0x03
+    00000340 CDr01r00         [24]  685 	call	_p_gegner_set
+    00000343 C9               [16]  686 	ret
+    00000344                        687 00113$:
+                                    688 ;gegner.c:142: else if (v_room == 10) {
+    00000344 FAr00r00         [16]  689 	ld	a, (#_v_room)
+    00000347 D6 0A            [ 8]  690 	sub	a, #0x0a
+    00000349 20 2D            [12]  691 	jr	NZ, 00110$
+                                    692 ;gegner.c:143: p_gegner_set (2, 2, 32, 80, 1, RIGHT);
+    0000034B 21 01 04         [12]  693 	ld	hl, #0x401
+    0000034E E5               [16]  694 	push	hl
+    0000034F 21 20 50         [12]  695 	ld	hl, #0x5020
+    00000352 E5               [16]  696 	push	hl
+    00000353 3E 02            [ 8]  697 	ld	a,#0x02
+    00000355 5F               [ 4]  698 	ld	e,a
+    00000356 CDr01r00         [24]  699 	call	_p_gegner_set
+                                    700 ;gegner.c:144: p_gegner_set (3, 1, 144, 80, 1, LEFT);
+    00000359 21 01 03         [12]  701 	ld	hl, #0x301
+    0000035C E5               [16]  702 	push	hl
+    0000035D 21 90 50         [12]  703 	ld	hl, #0x5090
+    00000360 E5               [16]  704 	push	hl
+    00000361 1E 01            [ 8]  705 	ld	e, #0x01
+    00000363 3E 03            [ 8]  706 	ld	a, #0x03
+    00000365 CDr01r00         [24]  707 	call	_p_gegner_set
+                                    708 ;gegner.c:145: p_gegner_set (4, 1, 80, 120, 1, UP);	
+    00000368 21 01 01         [12]  709 	ld	hl, #0x101
+    0000036B E5               [16]  710 	push	hl
+    0000036C 21 50 78         [12]  711 	ld	hl, #0x7850
+    0000036F E5               [16]  712 	push	hl
+    00000370 1E 01            [ 8]  713 	ld	e, #0x01
+    00000372 3E 04            [ 8]  714 	ld	a, #0x04
+    00000374 CDr01r00         [24]  715 	call	_p_gegner_set
+    00000377 C9               [16]  716 	ret
+    00000378                        717 00110$:
+                                    718 ;gegner.c:147: else if (v_room == 11) {
+    00000378 FAr00r00         [16]  719 	ld	a, (#_v_room)
+    0000037B D6 0B            [ 8]  720 	sub	a, #0x0b
+    0000037D 20 2D            [12]  721 	jr	NZ, 00107$
+                                    722 ;gegner.c:148: p_gegner_set (2, 2, 48, 120, 1, UP);
+    0000037F 21 01 01         [12]  723 	ld	hl, #0x101
+    00000382 E5               [16]  724 	push	hl
+    00000383 21 30 78         [12]  725 	ld	hl, #0x7830
+    00000386 E5               [16]  726 	push	hl
+    00000387 3E 02            [ 8]  727 	ld	a,#0x02
+    00000389 5F               [ 4]  728 	ld	e,a
+    0000038A CDr01r00         [24]  729 	call	_p_gegner_set
+                                    730 ;gegner.c:149: p_gegner_set (3, 1, 96, 32, 1, RIGHT);
+    0000038D 21 01 04         [12]  731 	ld	hl, #0x401
+    00000390 E5               [16]  732 	push	hl
+    00000391 21 60 20         [12]  733 	ld	hl, #0x2060
+    00000394 E5               [16]  734 	push	hl
+    00000395 1E 01            [ 8]  735 	ld	e, #0x01
+    00000397 3E 03            [ 8]  736 	ld	a, #0x03
+    00000399 CDr01r00         [24]  737 	call	_p_gegner_set
+                                    738 ;gegner.c:150: p_gegner_set (4, 2, 88, 40, 1, DOWN);	
+    0000039C 21 01 02         [12]  739 	ld	hl, #0x201
+    0000039F E5               [16]  740 	push	hl
+    000003A0 21 58 28         [12]  741 	ld	hl, #0x2858
+    000003A3 E5               [16]  742 	push	hl
+    000003A4 1E 02            [ 8]  743 	ld	e, #0x02
+    000003A6 3E 04            [ 8]  744 	ld	a, #0x04
+    000003A8 CDr01r00         [24]  745 	call	_p_gegner_set
+    000003AB C9               [16]  746 	ret
+    000003AC                        747 00107$:
+                                    748 ;gegner.c:152: else if (v_room == 12) {
+    000003AC FAr00r00         [16]  749 	ld	a, (#_v_room)
+    000003AF D6 0C            [ 8]  750 	sub	a, #0x0c
+    000003B1 20 2E            [12]  751 	jr	NZ, 00104$
+                                    752 ;gegner.c:153: p_gegner_set (2, 1, 88, 80, 1, DOWN);
+    000003B3 21 01 02         [12]  753 	ld	hl, #0x201
+    000003B6 E5               [16]  754 	push	hl
+    000003B7 21 58 50         [12]  755 	ld	hl, #0x5058
+    000003BA E5               [16]  756 	push	hl
+    000003BB 1E 01            [ 8]  757 	ld	e, #0x01
+    000003BD 3E 02            [ 8]  758 	ld	a, #0x02
+    000003BF CDr01r00         [24]  759 	call	_p_gegner_set
+                                    760 ;gegner.c:154: p_gegner_set (3, 2, 144, 72, 1, LEFT);
+    000003C2 21 01 03         [12]  761 	ld	hl, #0x301
+    000003C5 E5               [16]  762 	push	hl
+    000003C6 21 90 48         [12]  763 	ld	hl, #0x4890
+    000003C9 E5               [16]  764 	push	hl
+    000003CA 1E 02            [ 8]  765 	ld	e, #0x02
+    000003CC 3E 03            [ 8]  766 	ld	a, #0x03
+    000003CE CDr01r00         [24]  767 	call	_p_gegner_set
+                                    768 ;gegner.c:155: p_gegner_set (4, 1, 48, 120, 1, UP);
+    000003D1 21 01 01         [12]  769 	ld	hl, #0x101
+    000003D4 E5               [16]  770 	push	hl
+    000003D5 21 30 78         [12]  771 	ld	hl, #0x7830
+    000003D8 E5               [16]  772 	push	hl
+    000003D9 1E 01            [ 8]  773 	ld	e, #0x01
+    000003DB 3E 04            [ 8]  774 	ld	a, #0x04
+    000003DD CDr01r00         [24]  775 	call	_p_gegner_set
+    000003E0 C9               [16]  776 	ret
+    000003E1                        777 00104$:
+                                    778 ;gegner.c:157: else if (v_room == 13) {
+    000003E1 FAr00r00         [16]  779 	ld	a, (#_v_room)
+    000003E4 D6 0D            [ 8]  780 	sub	a, #0x0d
+    000003E6 C0               [20]  781 	ret	NZ
+                                    782 ;gegner.c:158: p_gegner_set (2, 2, 64, 80, 1, RIGHT);
+    000003E7 21 01 04         [12]  783 	ld	hl, #0x401
+    000003EA E5               [16]  784 	push	hl
+    000003EB 21 40 50         [12]  785 	ld	hl, #0x5040
+    000003EE E5               [16]  786 	push	hl
+    000003EF 3E 02            [ 8]  787 	ld	a,#0x02
+    000003F1 5F               [ 4]  788 	ld	e,a
+    000003F2 CDr01r00         [24]  789 	call	_p_gegner_set
+                                    790 ;gegner.c:159: p_gegner_set (3, 2, 144, 48, 1, LEFT);
+    000003F5 21 01 03         [12]  791 	ld	hl, #0x301
+    000003F8 E5               [16]  792 	push	hl
+    000003F9 21 90 30         [12]  793 	ld	hl, #0x3090
+    000003FC E5               [16]  794 	push	hl
+    000003FD 1E 02            [ 8]  795 	ld	e, #0x02
+    000003FF 3E 03            [ 8]  796 	ld	a, #0x03
+    00000401 CDr01r00         [24]  797 	call	_p_gegner_set
+                                    798 ;gegner.c:160: p_gegner_set (4, 2, 24, 112, 1, RIGHT);	
+    00000404 21 01 04         [12]  799 	ld	hl, #0x401
+    00000407 E5               [16]  800 	push	hl
+    00000408 21 18 70         [12]  801 	ld	hl, #0x7018
+    0000040B E5               [16]  802 	push	hl
+    0000040C 1E 02            [ 8]  803 	ld	e, #0x02
+    0000040E 3E 04            [ 8]  804 	ld	a, #0x04
+    00000410 CDr01r00         [24]  805 	call	_p_gegner_set
+                                    806 ;gegner.c:162: }
+    00000413 C9               [16]  807 	ret
+                                    808 	.area _HOME
+                                    809 ;--------------------------------------------------------
+                                    810 ; code
+                                    811 ;--------------------------------------------------------
+                                    812 	.area _CODE
+                                    813 	.area _CODE
+                                    814 	.area _INITIALIZER
+                                    815 	.area _CABS (ABS)

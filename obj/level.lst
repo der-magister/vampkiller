@@ -1,0 +1,904 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.1 #15267 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module level
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _p_gegner_lvlset
+                                     11 	.globl _p_umgebung_tuerzu
+                                     12 	.globl _p_umgebung_truheUhr
+                                     13 	.globl _p_umgebung_truheHerz
+                                     14 	.globl _p_umgebung_truheWeihwasser
+                                     15 	.globl _p_umgebung_truheEispflock
+                                     16 	.globl _p_umgebung_schild
+                                     17 	.globl _p_engine_showMap
+                                     18 	.globl _p_engine_loadMap
+                                     19 	.globl _p_player_setSprite
+                                     20 	.globl _delay
+                                     21 	.globl _p_level_init
+                                     22 	.globl _p_level_changeRoom
+                                     23 	.globl _p_level_room1
+                                     24 	.globl _p_level_room2
+                                     25 	.globl _p_level_room3
+                                     26 	.globl _p_level_room4
+                                     27 	.globl _p_level_room5
+                                     28 	.globl _p_level_room6
+                                     29 	.globl _p_level_room7
+                                     30 	.globl _p_level_room8
+                                     31 	.globl _p_level_room9
+                                     32 	.globl _p_level_room10
+                                     33 	.globl _p_level_room11
+                                     34 	.globl _p_level_room12
+                                     35 	.globl _p_level_room13
+                                     36 	.globl _p_level_room14
+                                     37 	.globl _p_level_room17
+                                     38 	.globl _p_level_control
+                                     39 ;--------------------------------------------------------
+                                     40 ; special function registers
+                                     41 ;--------------------------------------------------------
+                                     42 	.area _HRAM
+                                     43 ;--------------------------------------------------------
+                                     44 ; ram data
+                                     45 ;--------------------------------------------------------
+                                     46 	.area _DATA
+                                     47 ;--------------------------------------------------------
+                                     48 ; ram data
+                                     49 ;--------------------------------------------------------
+                                     50 	.area _INITIALIZED
+                                     51 ;--------------------------------------------------------
+                                     52 ; absolute external ram data
+                                     53 ;--------------------------------------------------------
+                                     54 	.area _DABS (ABS)
+                                     55 ;--------------------------------------------------------
+                                     56 ; global & static initialisations
+                                     57 ;--------------------------------------------------------
+                                     58 	.area _HOME
+                                     59 	.area _GSINIT
+                                     60 	.area _GSFINAL
+                                     61 	.area _GSINIT
+                                     62 ;--------------------------------------------------------
+                                     63 ; Home
+                                     64 ;--------------------------------------------------------
+                                     65 	.area _HOME
+                                     66 ;level.c:34: void p_level_init (void) __nonbanked
+                                     67 ;	---------------------------------
+                                     68 ; Function p_level_init
+                                     69 ; ---------------------------------
+    00000000                         70 _p_level_init::
+                                     71 ;level.c:36: v_room = 1;
+    00000000 21r00r00         [12]   72 	ld	hl, #_v_room
+    00000003 36 01            [12]   73 	ld	(hl), #0x01
+                                     74 ;level.c:37: }
+    00000005 C9               [16]   75 	ret
+                                     76 ;level.c:44: void p_level_changeRoom (uint8_t l_room, uint8_t l_sxk, uint8_t l_syk) __nonbanked
+                                     77 ;	---------------------------------
+                                     78 ; Function p_level_changeRoom
+                                     79 ; ---------------------------------
+    00000006                         80 _p_level_changeRoom::
+    00000006 6F               [ 4]   81 	ld	l, a
+                                     82 ;level.c:46: HIDE_SPRITES;
+    00000007 F0r00            [12]   83 	ldh	a, (_LCDC_REG + 0)
+    00000009 E6 FD            [ 8]   84 	and	a, #0xfd
+    0000000B E0r00            [12]   85 	ldh	(_LCDC_REG + 0), a
+                                     86 ;level.c:47: HIDE_BKG;
+    0000000D F0r00            [12]   87 	ldh	a, (_LCDC_REG + 0)
+    0000000F E6 FE            [ 8]   88 	and	a, #0xfe
+    00000011 E0r00            [12]   89 	ldh	(_LCDC_REG + 0), a
+                                     90 ;level.c:48: v_angriff = FALSE; v_angriffstimer = 0;
+    00000013 AF               [ 4]   91 	xor	a, a
+    00000014 EAr00r00         [16]   92 	ld	(_v_angriff), a
+    00000017 EAr00r00         [16]   93 	ld	(_v_angriffstimer), a
+                                     94 ;level.c:49: v_room = l_room;				
+    0000001A 7D               [ 4]   95 	ld	a, l
+    0000001B EAr00r00         [16]   96 	ld	(_v_room), a
+                                     97 ;level.c:50: v_sxk = l_sxk;
+    0000001E 21r00r00         [12]   98 	ld	hl, #_v_sxk
+    00000021 73               [ 8]   99 	ld	(hl), e
+                                    100 ;level.c:51: v_syk = l_syk;
+    00000022 F8 02            [12]  101 	ldhl	sp,	#2
+    00000024 7E               [ 8]  102 	ld	a, (hl)
+    00000025 EAr00r00         [16]  103 	ld	(#_v_syk),a
+                                    104 ;level.c:53: p_player_setSprite ();
+    00000028 CDr00r00         [24]  105 	call	_p_player_setSprite
+                                    106 ;level.c:54: v_movetimer = 0;
+    0000002B AF               [ 4]  107 	xor	a, a
+    0000002C EAr00r00         [16]  108 	ld	(#_v_movetimer),a
+                                    109 ;level.c:55: delay (160);
+    0000002F 11 A0 00         [12]  110 	ld	de, #0x00a0
+    00000032 CDr00r00         [24]  111 	call	_delay
+                                    112 ;level.c:56: SHOW_SPRITES;
+    00000035 F0r00            [12]  113 	ldh	a, (_LCDC_REG + 0)
+    00000037 F6 02            [ 8]  114 	or	a, #0x02
+    00000039 E0r00            [12]  115 	ldh	(_LCDC_REG + 0), a
+                                    116 ;level.c:57: SHOW_BKG;
+    0000003B F0r00            [12]  117 	ldh	a, (_LCDC_REG + 0)
+    0000003D F6 01            [ 8]  118 	or	a, #0x01
+    0000003F E0r00            [12]  119 	ldh	(_LCDC_REG + 0), a
+                                    120 ;level.c:58: v_angriff = TRUE;
+    00000041 21r00r00         [12]  121 	ld	hl, #_v_angriff
+    00000044 36 01            [12]  122 	ld	(hl), #0x01
+                                    123 ;level.c:59: p_gegner_lvlset ();
+    00000046 CDr00r00         [24]  124 	call	_p_gegner_lvlset
+                                    125 ;level.c:60: }
+    00000049 E1               [12]  126 	pop	hl
+    0000004A 33               [ 8]  127 	inc	sp
+    0000004B E9               [ 4]  128 	jp	(hl)
+                                    129 ;level.c:63: void p_level_room1 (void) __nonbanked
+                                    130 ;	---------------------------------
+                                    131 ; Function p_level_room1
+                                    132 ; ---------------------------------
+    0000004C                        133 _p_level_room1::
+                                    134 ;level.c:65: if (v_smk == 8) { 
+    0000004C FAr00r00         [16]  135 	ld	a, (#_v_smk)
+    0000004F D6 08            [ 8]  136 	sub	a, #0x08
+    00000051 20 18            [12]  137 	jr	NZ, 00102$
+                                    138 ;level.c:66: p_engine_loadMap (room2);
+    00000053 11r00r00         [12]  139 	ld	de, #_room2+0
+    00000056 D5               [16]  140 	push	de
+    00000057 CDr00r00         [24]  141 	call	_p_engine_loadMap
+    0000005A D1               [12]  142 	pop	de
+                                    143 ;level.c:67: p_engine_showMap (room2);
+    0000005B CDr00r00         [24]  144 	call	_p_engine_showMap
+                                    145 ;level.c:68: p_level_changeRoom (2, v_sxk, 128); 		
+    0000005E 3E 80            [ 8]  146 	ld	a, #0x80
+    00000060 F5               [16]  147 	push	af
+    00000061 33               [ 8]  148 	inc	sp
+    00000062 FAr00r00         [16]  149 	ld	a, (_v_sxk)
+    00000065 5F               [ 4]  150 	ld	e, a
+    00000066 3E 02            [ 8]  151 	ld	a, #0x02
+    00000068 CDr06r00         [24]  152 	call	_p_level_changeRoom
+    0000006B                        153 00102$:
+                                    154 ;level.c:70: p_umgebung_schild (46, shield1);
+    0000006B 11r00r00         [12]  155 	ld	de, #_shield1
+    0000006E 3E 2E            [ 8]  156 	ld	a, #0x2e
+                                    157 ;level.c:71: }
+    00000070 C3r00r00         [16]  158 	jp	_p_umgebung_schild
+                                    159 ;level.c:74: void p_level_room2 (void) __nonbanked
+                                    160 ;	---------------------------------
+                                    161 ; Function p_level_room2
+                                    162 ; ---------------------------------
+    00000073                        163 _p_level_room2::
+                                    164 ;level.c:76: if (v_smk == 242) {
+    00000073 FAr00r00         [16]  165 	ld	a, (#_v_smk)
+    00000076 D6 F2            [ 8]  166 	sub	a, #0xf2
+    00000078 20 1A            [12]  167 	jr	NZ, 00105$
+                                    168 ;level.c:77: p_engine_loadMap (room1);
+    0000007A 11r00r00         [12]  169 	ld	de, #_room1+0
+    0000007D D5               [16]  170 	push	de
+    0000007E CDr00r00         [24]  171 	call	_p_engine_loadMap
+    00000081 D1               [12]  172 	pop	de
+                                    173 ;level.c:78: p_engine_showMap (room1);
+    00000082 CDr00r00         [24]  174 	call	_p_engine_showMap
+                                    175 ;level.c:79: p_level_changeRoom (1, v_sxk, 24);
+    00000085 3E 18            [ 8]  176 	ld	a, #0x18
+    00000087 F5               [16]  177 	push	af
+    00000088 33               [ 8]  178 	inc	sp
+    00000089 FAr00r00         [16]  179 	ld	a, (_v_sxk)
+    0000008C 5F               [ 4]  180 	ld	e, a
+    0000008D 3E 01            [ 8]  181 	ld	a, #0x01
+    0000008F CDr06r00         [24]  182 	call	_p_level_changeRoom
+    00000092 18 25            [12]  183 	jr	00106$
+    00000094                        184 00105$:
+                                    185 ;level.c:81: else if ((v_smk == 8) && (v_tuer [0] == TRUE)) {
+    00000094 FAr00r00         [16]  186 	ld	a, (#_v_smk)
+    00000097 D6 08            [ 8]  187 	sub	a, #0x08
+    00000099 20 1E            [12]  188 	jr	NZ, 00106$
+    0000009B FAr00r00         [16]  189 	ld	a, (#_v_tuer + 0)
+    0000009E 3D               [ 4]  190 	dec	a
+    0000009F 20 18            [12]  191 	jr	NZ, 00106$
+                                    192 ;level.c:82: p_engine_loadMap (room3);
+    000000A1 11r00r00         [12]  193 	ld	de, #_room3
+    000000A4 D5               [16]  194 	push	de
+    000000A5 CDr00r00         [24]  195 	call	_p_engine_loadMap
+    000000A8 D1               [12]  196 	pop	de
+                                    197 ;level.c:83: p_engine_showMap (room3);
+    000000A9 CDr00r00         [24]  198 	call	_p_engine_showMap
+                                    199 ;level.c:84: p_level_changeRoom (3, v_sxk, 128);
+    000000AC 3E 80            [ 8]  200 	ld	a, #0x80
+    000000AE F5               [16]  201 	push	af
+    000000AF 33               [ 8]  202 	inc	sp
+    000000B0 FAr00r00         [16]  203 	ld	a, (_v_sxk)
+    000000B3 5F               [ 4]  204 	ld	e, a
+    000000B4 3E 03            [ 8]  205 	ld	a, #0x03
+    000000B6 CDr06r00         [24]  206 	call	_p_level_changeRoom
+    000000B9                        207 00106$:
+                                    208 ;level.c:86: p_umgebung_truheEispflock (52, 1);
+    000000B9 1E 01            [ 8]  209 	ld	e, #0x01
+    000000BB 3E 34            [ 8]  210 	ld	a, #0x34
+    000000BD CDr00r00         [24]  211 	call	_p_umgebung_truheEispflock
+                                    212 ;level.c:88: if (v_tuer [0] == FALSE) { p_umgebung_tuerzu (8, 0); }
+    000000C0 FAr00r00         [16]  213 	ld	a, (#_v_tuer + 0)
+    000000C3 B7               [ 4]  214 	or	a, a
+    000000C4 C0               [20]  215 	ret	NZ
+    000000C5 5F               [ 4]  216 	ld	e, a
+    000000C6 3E 08            [ 8]  217 	ld	a, #0x08
+                                    218 ;level.c:89: }
+    000000C8 C3r00r00         [16]  219 	jp	_p_umgebung_tuerzu
+                                    220 ;level.c:92: void p_level_room3 (void) __nonbanked
+                                    221 ;	---------------------------------
+                                    222 ; Function p_level_room3
+                                    223 ; ---------------------------------
+    000000CB                        224 _p_level_room3::
+                                    225 ;level.c:94: if (v_smk == 125) {
+    000000CB FAr00r00         [16]  226 	ld	a, (#_v_smk)
+    000000CE D6 7D            [ 8]  227 	sub	a, #0x7d
+    000000D0 20 18            [12]  228 	jr	NZ, 00104$
+                                    229 ;level.c:95: p_engine_loadMap (room4);
+    000000D2 11r00r00         [12]  230 	ld	de, #_room4+0
+    000000D5 D5               [16]  231 	push	de
+    000000D6 CDr00r00         [24]  232 	call	_p_engine_loadMap
+    000000D9 D1               [12]  233 	pop	de
+                                    234 ;level.c:96: p_engine_showMap (room4);
+    000000DA CDr00r00         [24]  235 	call	_p_engine_showMap
+                                    236 ;level.c:97: p_level_changeRoom (4, 16, v_syk);
+    000000DD FAr00r00         [16]  237 	ld	a, (_v_syk)
+    000000E0 F5               [16]  238 	push	af
+    000000E1 33               [ 8]  239 	inc	sp
+    000000E2 1E 10            [ 8]  240 	ld	e, #0x10
+    000000E4 3E 04            [ 8]  241 	ld	a, #0x04
+    000000E6 CDr06r00         [24]  242 	call	_p_level_changeRoom
+    000000E9 C9               [16]  243 	ret
+    000000EA                        244 00104$:
+                                    245 ;level.c:99: else if (v_smk == 242) {
+    000000EA FAr00r00         [16]  246 	ld	a, (#_v_smk)
+    000000ED D6 F2            [ 8]  247 	sub	a, #0xf2
+    000000EF C0               [20]  248 	ret	NZ
+                                    249 ;level.c:100: p_engine_loadMap (room2);
+    000000F0 11r00r00         [12]  250 	ld	de, #_room2
+    000000F3 D5               [16]  251 	push	de
+    000000F4 CDr00r00         [24]  252 	call	_p_engine_loadMap
+    000000F7 D1               [12]  253 	pop	de
+                                    254 ;level.c:101: p_engine_showMap (room2);
+    000000F8 CDr00r00         [24]  255 	call	_p_engine_showMap
+                                    256 ;level.c:102: p_level_changeRoom (2, v_sxk, 24);
+    000000FB 3E 18            [ 8]  257 	ld	a, #0x18
+    000000FD F5               [16]  258 	push	af
+    000000FE 33               [ 8]  259 	inc	sp
+    000000FF FAr00r00         [16]  260 	ld	a, (_v_sxk)
+    00000102 5F               [ 4]  261 	ld	e, a
+    00000103 3E 02            [ 8]  262 	ld	a, #0x02
+    00000105 CDr06r00         [24]  263 	call	_p_level_changeRoom
+                                    264 ;level.c:104: }
+    00000108 C9               [16]  265 	ret
+                                    266 ;level.c:107: void p_level_room4 (void) __nonbanked
+                                    267 ;	---------------------------------
+                                    268 ; Function p_level_room4
+                                    269 ; ---------------------------------
+    00000109                        270 _p_level_room4::
+                                    271 ;level.c:109: if (v_smk == 108) {
+    00000109 FAr00r00         [16]  272 	ld	a, (#_v_smk)
+    0000010C D6 6C            [ 8]  273 	sub	a, #0x6c
+    0000010E 20 18            [12]  274 	jr	NZ, 00104$
+                                    275 ;level.c:110: p_engine_loadMap (room3);
+    00000110 11r00r00         [12]  276 	ld	de, #_room3+0
+    00000113 D5               [16]  277 	push	de
+    00000114 CDr00r00         [24]  278 	call	_p_engine_loadMap
+    00000117 D1               [12]  279 	pop	de
+                                    280 ;level.c:111: p_engine_showMap (room3);
+    00000118 CDr00r00         [24]  281 	call	_p_engine_showMap
+                                    282 ;level.c:112: p_level_changeRoom (3, 152, v_syk);
+    0000011B FAr00r00         [16]  283 	ld	a, (_v_syk)
+    0000011E F5               [16]  284 	push	af
+    0000011F 33               [ 8]  285 	inc	sp
+    00000120 1E 98            [ 8]  286 	ld	e, #0x98
+    00000122 3E 03            [ 8]  287 	ld	a, #0x03
+    00000124 CDr06r00         [24]  288 	call	_p_level_changeRoom
+    00000127 C9               [16]  289 	ret
+    00000128                        290 00104$:
+                                    291 ;level.c:114: else if (v_smk == 125) {
+    00000128 FAr00r00         [16]  292 	ld	a, (#_v_smk)
+    0000012B D6 7D            [ 8]  293 	sub	a, #0x7d
+    0000012D C0               [20]  294 	ret	NZ
+                                    295 ;level.c:115: p_engine_loadMap (room5);
+    0000012E 11r00r00         [12]  296 	ld	de, #_room5
+    00000131 D5               [16]  297 	push	de
+    00000132 CDr00r00         [24]  298 	call	_p_engine_loadMap
+    00000135 D1               [12]  299 	pop	de
+                                    300 ;level.c:116: p_engine_showMap (room5);
+    00000136 CDr00r00         [24]  301 	call	_p_engine_showMap
+                                    302 ;level.c:117: p_level_changeRoom (5, 16, v_syk);
+    00000139 FAr00r00         [16]  303 	ld	a, (_v_syk)
+    0000013C F5               [16]  304 	push	af
+    0000013D 33               [ 8]  305 	inc	sp
+    0000013E 1E 10            [ 8]  306 	ld	e, #0x10
+    00000140 3E 05            [ 8]  307 	ld	a, #0x05
+    00000142 CDr06r00         [24]  308 	call	_p_level_changeRoom
+                                    309 ;level.c:119: }
+    00000145 C9               [16]  310 	ret
+                                    311 ;level.c:122: void p_level_room5 (void) __nonbanked
+                                    312 ;	---------------------------------
+                                    313 ; Function p_level_room5
+                                    314 ; ---------------------------------
+    00000146                        315 _p_level_room5::
+                                    316 ;level.c:124: if (v_smk == 108) {
+    00000146 FAr00r00         [16]  317 	ld	a, (#_v_smk)
+    00000149 D6 6C            [ 8]  318 	sub	a, #0x6c
+    0000014B 20 19            [12]  319 	jr	NZ, 00104$
+                                    320 ;level.c:125: p_engine_loadMap (room4);
+    0000014D 11r00r00         [12]  321 	ld	de, #_room4+0
+    00000150 D5               [16]  322 	push	de
+    00000151 CDr00r00         [24]  323 	call	_p_engine_loadMap
+    00000154 D1               [12]  324 	pop	de
+                                    325 ;level.c:126: p_engine_showMap (room4);
+    00000155 CDr00r00         [24]  326 	call	_p_engine_showMap
+                                    327 ;level.c:127: p_level_changeRoom (4, 152, v_syk);
+    00000158 FAr00r00         [16]  328 	ld	a, (_v_syk)
+    0000015B F5               [16]  329 	push	af
+    0000015C 33               [ 8]  330 	inc	sp
+    0000015D 1E 98            [ 8]  331 	ld	e, #0x98
+    0000015F 3E 04            [ 8]  332 	ld	a, #0x04
+    00000161 CDr06r00         [24]  333 	call	_p_level_changeRoom
+    00000164 18 1F            [12]  334 	jr	00105$
+    00000166                        335 00104$:
+                                    336 ;level.c:130: else if (v_smk == 8) {
+    00000166 FAr00r00         [16]  337 	ld	a, (#_v_smk)
+    00000169 D6 08            [ 8]  338 	sub	a, #0x08
+    0000016B 20 18            [12]  339 	jr	NZ, 00105$
+                                    340 ;level.c:131: p_engine_loadMap (room6);
+    0000016D 11r00r00         [12]  341 	ld	de, #_room6
+    00000170 D5               [16]  342 	push	de
+    00000171 CDr00r00         [24]  343 	call	_p_engine_loadMap
+    00000174 D1               [12]  344 	pop	de
+                                    345 ;level.c:132: p_engine_showMap (room6);
+    00000175 CDr00r00         [24]  346 	call	_p_engine_showMap
+                                    347 ;level.c:133: p_level_changeRoom (6, v_sxk, 128);
+    00000178 3E 80            [ 8]  348 	ld	a, #0x80
+    0000017A F5               [16]  349 	push	af
+    0000017B 33               [ 8]  350 	inc	sp
+    0000017C FAr00r00         [16]  351 	ld	a, (_v_sxk)
+    0000017F 5F               [ 4]  352 	ld	e, a
+    00000180 3E 06            [ 8]  353 	ld	a, #0x06
+    00000182 CDr06r00         [24]  354 	call	_p_level_changeRoom
+    00000185                        355 00105$:
+                                    356 ;level.c:135: p_umgebung_truheWeihwasser (231, 2);
+    00000185 1E 02            [ 8]  357 	ld	e, #0x02
+    00000187 3E E7            [ 8]  358 	ld	a, #0xe7
+                                    359 ;level.c:136: }
+    00000189 C3r00r00         [16]  360 	jp	_p_umgebung_truheWeihwasser
+                                    361 ;level.c:139: void p_level_room6 (void) __nonbanked
+                                    362 ;	---------------------------------
+                                    363 ; Function p_level_room6
+                                    364 ; ---------------------------------
+    0000018C                        365 _p_level_room6::
+                                    366 ;level.c:141: if (v_smk == 242) {
+    0000018C FAr00r00         [16]  367 	ld	a, (#_v_smk)
+    0000018F D6 F2            [ 8]  368 	sub	a, #0xf2
+    00000191 20 19            [12]  369 	jr	NZ, 00107$
+                                    370 ;level.c:142: p_engine_loadMap (room5);
+    00000193 11r00r00         [12]  371 	ld	de, #_room5+0
+    00000196 D5               [16]  372 	push	de
+    00000197 CDr00r00         [24]  373 	call	_p_engine_loadMap
+    0000019A D1               [12]  374 	pop	de
+                                    375 ;level.c:143: p_engine_showMap (room5);
+    0000019B CDr00r00         [24]  376 	call	_p_engine_showMap
+                                    377 ;level.c:144: p_level_changeRoom (5, v_sxk, 24);
+    0000019E 3E 18            [ 8]  378 	ld	a, #0x18
+    000001A0 F5               [16]  379 	push	af
+    000001A1 33               [ 8]  380 	inc	sp
+    000001A2 FAr00r00         [16]  381 	ld	a, (_v_sxk)
+    000001A5 5F               [ 4]  382 	ld	e, a
+    000001A6 3E 05            [ 8]  383 	ld	a, #0x05
+    000001A8 CDr06r00         [24]  384 	call	_p_level_changeRoom
+    000001AB C9               [16]  385 	ret
+    000001AC                        386 00107$:
+                                    387 ;level.c:146: else if (v_smk == 108) {
+    000001AC FAr00r00         [16]  388 	ld	a, (#_v_smk)
+    000001AF D6 6C            [ 8]  389 	sub	a, #0x6c
+    000001B1 20 18            [12]  390 	jr	NZ, 00104$
+                                    391 ;level.c:147: p_engine_loadMap (room7);
+    000001B3 11r00r00         [12]  392 	ld	de, #_room7+0
+    000001B6 D5               [16]  393 	push	de
+    000001B7 CDr00r00         [24]  394 	call	_p_engine_loadMap
+    000001BA D1               [12]  395 	pop	de
+                                    396 ;level.c:148: p_engine_showMap (room7);
+    000001BB CDr00r00         [24]  397 	call	_p_engine_showMap
+                                    398 ;level.c:149: p_level_changeRoom (7, 152, v_syk);
+    000001BE FAr00r00         [16]  399 	ld	a, (_v_syk)
+    000001C1 F5               [16]  400 	push	af
+    000001C2 33               [ 8]  401 	inc	sp
+    000001C3 1E 98            [ 8]  402 	ld	e, #0x98
+    000001C5 3E 07            [ 8]  403 	ld	a, #0x07
+    000001C7 CDr06r00         [24]  404 	call	_p_level_changeRoom
+    000001CA C9               [16]  405 	ret
+    000001CB                        406 00104$:
+                                    407 ;level.c:151: else if (v_smk == 89) {
+    000001CB FAr00r00         [16]  408 	ld	a, (#_v_smk)
+    000001CE D6 59            [ 8]  409 	sub	a, #0x59
+    000001D0 C0               [20]  410 	ret	NZ
+                                    411 ;level.c:152: p_engine_loadMap (room17);
+    000001D1 11r00r00         [12]  412 	ld	de, #_room17
+    000001D4 D5               [16]  413 	push	de
+    000001D5 CDr00r00         [24]  414 	call	_p_engine_loadMap
+    000001D8 D1               [12]  415 	pop	de
+                                    416 ;level.c:153: p_engine_showMap (room17);
+    000001D9 CDr00r00         [24]  417 	call	_p_engine_showMap
+                                    418 ;level.c:154: p_level_changeRoom (17, 72, v_syk);	
+    000001DC FAr00r00         [16]  419 	ld	a, (_v_syk)
+    000001DF F5               [16]  420 	push	af
+    000001E0 33               [ 8]  421 	inc	sp
+    000001E1 1E 48            [ 8]  422 	ld	e, #0x48
+    000001E3 3E 11            [ 8]  423 	ld	a, #0x11
+    000001E5 CDr06r00         [24]  424 	call	_p_level_changeRoom
+                                    425 ;level.c:156: }
+    000001E8 C9               [16]  426 	ret
+                                    427 ;level.c:159: void p_level_room7 (void) __nonbanked
+                                    428 ;	---------------------------------
+                                    429 ; Function p_level_room7
+                                    430 ; ---------------------------------
+    000001E9                        431 _p_level_room7::
+                                    432 ;level.c:161: if (v_smk == 125) {
+    000001E9 FAr00r00         [16]  433 	ld	a, (#_v_smk)
+    000001EC D6 7D            [ 8]  434 	sub	a, #0x7d
+    000001EE 20 18            [12]  435 	jr	NZ, 00104$
+                                    436 ;level.c:162: p_engine_loadMap (room6);
+    000001F0 11r00r00         [12]  437 	ld	de, #_room6+0
+    000001F3 D5               [16]  438 	push	de
+    000001F4 CDr00r00         [24]  439 	call	_p_engine_loadMap
+    000001F7 D1               [12]  440 	pop	de
+                                    441 ;level.c:163: p_engine_showMap (room6);
+    000001F8 CDr00r00         [24]  442 	call	_p_engine_showMap
+                                    443 ;level.c:164: p_level_changeRoom (6, 16, v_syk);
+    000001FB FAr00r00         [16]  444 	ld	a, (_v_syk)
+    000001FE F5               [16]  445 	push	af
+    000001FF 33               [ 8]  446 	inc	sp
+    00000200 1E 10            [ 8]  447 	ld	e, #0x10
+    00000202 3E 06            [ 8]  448 	ld	a, #0x06
+    00000204 CDr06r00         [24]  449 	call	_p_level_changeRoom
+    00000207 C9               [16]  450 	ret
+    00000208                        451 00104$:
+                                    452 ;level.c:166: else if (v_smk == 108) {
+    00000208 FAr00r00         [16]  453 	ld	a, (#_v_smk)
+    0000020B D6 6C            [ 8]  454 	sub	a, #0x6c
+    0000020D C0               [20]  455 	ret	NZ
+                                    456 ;level.c:167: p_engine_loadMap (room8);
+    0000020E 11r00r00         [12]  457 	ld	de, #_room8
+    00000211 D5               [16]  458 	push	de
+    00000212 CDr00r00         [24]  459 	call	_p_engine_loadMap
+    00000215 D1               [12]  460 	pop	de
+                                    461 ;level.c:168: p_engine_showMap (room8);
+    00000216 CDr00r00         [24]  462 	call	_p_engine_showMap
+                                    463 ;level.c:170: p_level_changeRoom (8, 152, v_syk);
+    00000219 FAr00r00         [16]  464 	ld	a, (_v_syk)
+    0000021C F5               [16]  465 	push	af
+    0000021D 33               [ 8]  466 	inc	sp
+    0000021E 1E 98            [ 8]  467 	ld	e, #0x98
+    00000220 3E 08            [ 8]  468 	ld	a, #0x08
+    00000222 CDr06r00         [24]  469 	call	_p_level_changeRoom
+                                    470 ;level.c:172: }
+    00000225 C9               [16]  471 	ret
+                                    472 ;level.c:175: void p_level_room8 (void) __nonbanked
+                                    473 ;	---------------------------------
+                                    474 ; Function p_level_room8
+                                    475 ; ---------------------------------
+    00000226                        476 _p_level_room8::
+                                    477 ;level.c:177: if (v_smk == 125) {
+    00000226 FAr00r00         [16]  478 	ld	a, (#_v_smk)
+    00000229 D6 7D            [ 8]  479 	sub	a, #0x7d
+    0000022B 20 18            [12]  480 	jr	NZ, 00104$
+                                    481 ;level.c:178: p_engine_loadMap (room7);
+    0000022D 11r00r00         [12]  482 	ld	de, #_room7+0
+    00000230 D5               [16]  483 	push	de
+    00000231 CDr00r00         [24]  484 	call	_p_engine_loadMap
+    00000234 D1               [12]  485 	pop	de
+                                    486 ;level.c:179: p_engine_showMap (room7);
+    00000235 CDr00r00         [24]  487 	call	_p_engine_showMap
+                                    488 ;level.c:180: p_level_changeRoom (7, 16, v_syk);
+    00000238 FAr00r00         [16]  489 	ld	a, (_v_syk)
+    0000023B F5               [16]  490 	push	af
+    0000023C 33               [ 8]  491 	inc	sp
+    0000023D 1E 10            [ 8]  492 	ld	e, #0x10
+    0000023F 3E 07            [ 8]  493 	ld	a, #0x07
+    00000241 CDr06r00         [24]  494 	call	_p_level_changeRoom
+    00000244 C9               [16]  495 	ret
+    00000245                        496 00104$:
+                                    497 ;level.c:182: else if (v_smk == 8) {
+    00000245 FAr00r00         [16]  498 	ld	a, (#_v_smk)
+    00000248 D6 08            [ 8]  499 	sub	a, #0x08
+    0000024A C0               [20]  500 	ret	NZ
+                                    501 ;level.c:183: p_engine_loadMap (room9);
+    0000024B 11r00r00         [12]  502 	ld	de, #_room9
+    0000024E D5               [16]  503 	push	de
+    0000024F CDr00r00         [24]  504 	call	_p_engine_loadMap
+    00000252 D1               [12]  505 	pop	de
+                                    506 ;level.c:184: p_engine_showMap (room9);
+    00000253 CDr00r00         [24]  507 	call	_p_engine_showMap
+                                    508 ;level.c:185: p_level_changeRoom (9, v_sxk, 128);	
+    00000256 3E 80            [ 8]  509 	ld	a, #0x80
+    00000258 F5               [16]  510 	push	af
+    00000259 33               [ 8]  511 	inc	sp
+    0000025A FAr00r00         [16]  512 	ld	a, (_v_sxk)
+    0000025D 5F               [ 4]  513 	ld	e, a
+    0000025E 3E 09            [ 8]  514 	ld	a, #0x09
+    00000260 CDr06r00         [24]  515 	call	_p_level_changeRoom
+                                    516 ;level.c:187: }
+    00000263 C9               [16]  517 	ret
+                                    518 ;level.c:190: void p_level_room9 (void) __nonbanked
+                                    519 ;	---------------------------------
+                                    520 ; Function p_level_room9
+                                    521 ; ---------------------------------
+    00000264                        522 _p_level_room9::
+                                    523 ;level.c:192: if (v_smk == 242)
+    00000264 FAr00r00         [16]  524 	ld	a, (#_v_smk)
+    00000267 D6 F2            [ 8]  525 	sub	a, #0xf2
+    00000269 20 1A            [12]  526 	jr	NZ, 00104$
+                                    527 ;level.c:194: p_engine_loadMap (room8);
+    0000026B 11r00r00         [12]  528 	ld	de, #_room8+0
+    0000026E D5               [16]  529 	push	de
+    0000026F CDr00r00         [24]  530 	call	_p_engine_loadMap
+    00000272 D1               [12]  531 	pop	de
+                                    532 ;level.c:195: p_engine_showMap (room8);
+    00000273 CDr00r00         [24]  533 	call	_p_engine_showMap
+                                    534 ;level.c:196: p_level_changeRoom (8, v_sxk, 24);	
+    00000276 3E 18            [ 8]  535 	ld	a, #0x18
+    00000278 F5               [16]  536 	push	af
+    00000279 33               [ 8]  537 	inc	sp
+    0000027A FAr00r00         [16]  538 	ld	a, (_v_sxk)
+    0000027D 5F               [ 4]  539 	ld	e, a
+    0000027E 3E 08            [ 8]  540 	ld	a, #0x08
+    00000280 CDr06r00         [24]  541 	call	_p_level_changeRoom
+    00000283 18 1F            [12]  542 	jr	00105$
+    00000285                        543 00104$:
+                                    544 ;level.c:198: else if (v_smk == 5) {
+    00000285 FAr00r00         [16]  545 	ld	a, (#_v_smk)
+    00000288 D6 05            [ 8]  546 	sub	a, #0x05
+    0000028A 20 18            [12]  547 	jr	NZ, 00105$
+                                    548 ;level.c:199: p_engine_loadMap (room10);
+    0000028C 11r00r00         [12]  549 	ld	de, #_room10
+    0000028F D5               [16]  550 	push	de
+    00000290 CDr00r00         [24]  551 	call	_p_engine_loadMap
+    00000293 D1               [12]  552 	pop	de
+                                    553 ;level.c:200: p_engine_showMap (room10);
+    00000294 CDr00r00         [24]  554 	call	_p_engine_showMap
+                                    555 ;level.c:201: p_level_changeRoom (10, v_sxk, 128);	
+    00000297 3E 80            [ 8]  556 	ld	a, #0x80
+    00000299 F5               [16]  557 	push	af
+    0000029A 33               [ 8]  558 	inc	sp
+    0000029B FAr00r00         [16]  559 	ld	a, (_v_sxk)
+    0000029E 5F               [ 4]  560 	ld	e, a
+    0000029F 3E 0A            [ 8]  561 	ld	a, #0x0a
+    000002A1 CDr06r00         [24]  562 	call	_p_level_changeRoom
+    000002A4                        563 00105$:
+                                    564 ;level.c:203: p_umgebung_truheHerz (199, 3);
+    000002A4 1E 03            [ 8]  565 	ld	e, #0x03
+    000002A6 3E C7            [ 8]  566 	ld	a, #0xc7
+                                    567 ;level.c:204: }
+    000002A8 C3r00r00         [16]  568 	jp	_p_umgebung_truheHerz
+                                    569 ;level.c:207: void p_level_room10 (void) __nonbanked
+                                    570 ;	---------------------------------
+                                    571 ; Function p_level_room10
+                                    572 ; ---------------------------------
+    000002AB                        573 _p_level_room10::
+                                    574 ;level.c:209: if (v_smk == 239)
+    000002AB FAr00r00         [16]  575 	ld	a, (#_v_smk)
+    000002AE D6 EF            [ 8]  576 	sub	a, #0xef
+    000002B0 20 19            [12]  577 	jr	NZ, 00104$
+                                    578 ;level.c:211: p_engine_loadMap (room9);
+    000002B2 11r00r00         [12]  579 	ld	de, #_room9+0
+    000002B5 D5               [16]  580 	push	de
+    000002B6 CDr00r00         [24]  581 	call	_p_engine_loadMap
+    000002B9 D1               [12]  582 	pop	de
+                                    583 ;level.c:212: p_engine_showMap (room9);
+    000002BA CDr00r00         [24]  584 	call	_p_engine_showMap
+                                    585 ;level.c:213: p_level_changeRoom (9, v_sxk, 24);	
+    000002BD 3E 18            [ 8]  586 	ld	a, #0x18
+    000002BF F5               [16]  587 	push	af
+    000002C0 33               [ 8]  588 	inc	sp
+    000002C1 FAr00r00         [16]  589 	ld	a, (_v_sxk)
+    000002C4 5F               [ 4]  590 	ld	e, a
+    000002C5 3E 09            [ 8]  591 	ld	a, #0x09
+    000002C7 CDr06r00         [24]  592 	call	_p_level_changeRoom
+    000002CA C9               [16]  593 	ret
+    000002CB                        594 00104$:
+                                    595 ;level.c:215: else if (v_smk == 179) {
+    000002CB FAr00r00         [16]  596 	ld	a, (#_v_smk)
+    000002CE D6 B3            [ 8]  597 	sub	a, #0xb3
+    000002D0 C0               [20]  598 	ret	NZ
+                                    599 ;level.c:216: p_engine_loadMap (room11);
+    000002D1 11r00r00         [12]  600 	ld	de, #_room11
+    000002D4 D5               [16]  601 	push	de
+    000002D5 CDr00r00         [24]  602 	call	_p_engine_loadMap
+    000002D8 D1               [12]  603 	pop	de
+                                    604 ;level.c:217: p_engine_showMap (room11);
+    000002D9 CDr00r00         [24]  605 	call	_p_engine_showMap
+                                    606 ;level.c:218: p_level_changeRoom (11, 16, v_syk);	
+    000002DC FAr00r00         [16]  607 	ld	a, (_v_syk)
+    000002DF F5               [16]  608 	push	af
+    000002E0 33               [ 8]  609 	inc	sp
+    000002E1 1E 10            [ 8]  610 	ld	e, #0x10
+    000002E3 3E 0B            [ 8]  611 	ld	a, #0x0b
+    000002E5 CDr06r00         [24]  612 	call	_p_level_changeRoom
+                                    613 ;level.c:220: }
+    000002E8 C9               [16]  614 	ret
+                                    615 ;level.c:223: void p_level_room11 (void) __nonbanked
+                                    616 ;	---------------------------------
+                                    617 ; Function p_level_room11
+                                    618 ; ---------------------------------
+    000002E9                        619 _p_level_room11::
+                                    620 ;level.c:225: if (v_smk == 162) {
+    000002E9 FAr00r00         [16]  621 	ld	a, (#_v_smk)
+    000002EC D6 A2            [ 8]  622 	sub	a, #0xa2
+    000002EE 20 18            [12]  623 	jr	NZ, 00104$
+                                    624 ;level.c:226: p_engine_loadMap (room10);
+    000002F0 11r00r00         [12]  625 	ld	de, #_room10+0
+    000002F3 D5               [16]  626 	push	de
+    000002F4 CDr00r00         [24]  627 	call	_p_engine_loadMap
+    000002F7 D1               [12]  628 	pop	de
+                                    629 ;level.c:227: p_engine_showMap (room10);
+    000002F8 CDr00r00         [24]  630 	call	_p_engine_showMap
+                                    631 ;level.c:228: p_level_changeRoom (10, 152, v_syk);	
+    000002FB FAr00r00         [16]  632 	ld	a, (_v_syk)
+    000002FE F5               [16]  633 	push	af
+    000002FF 33               [ 8]  634 	inc	sp
+    00000300 1E 98            [ 8]  635 	ld	e, #0x98
+    00000302 3E 0A            [ 8]  636 	ld	a, #0x0a
+    00000304 CDr06r00         [24]  637 	call	_p_level_changeRoom
+    00000307 C9               [16]  638 	ret
+    00000308                        639 00104$:
+                                    640 ;level.c:230: else if (v_smk == 179) {
+    00000308 FAr00r00         [16]  641 	ld	a, (#_v_smk)
+    0000030B D6 B3            [ 8]  642 	sub	a, #0xb3
+    0000030D C0               [20]  643 	ret	NZ
+                                    644 ;level.c:231: p_engine_loadMap (room12);
+    0000030E 11r00r00         [12]  645 	ld	de, #_room12
+    00000311 D5               [16]  646 	push	de
+    00000312 CDr00r00         [24]  647 	call	_p_engine_loadMap
+    00000315 D1               [12]  648 	pop	de
+                                    649 ;level.c:232: p_engine_showMap (room12);
+    00000316 CDr00r00         [24]  650 	call	_p_engine_showMap
+                                    651 ;level.c:233: p_level_changeRoom (12, 16, v_syk);		
+    00000319 FAr00r00         [16]  652 	ld	a, (_v_syk)
+    0000031C F5               [16]  653 	push	af
+    0000031D 33               [ 8]  654 	inc	sp
+    0000031E 1E 10            [ 8]  655 	ld	e, #0x10
+    00000320 3E 0C            [ 8]  656 	ld	a, #0x0c
+    00000322 CDr06r00         [24]  657 	call	_p_level_changeRoom
+                                    658 ;level.c:235: }
+    00000325 C9               [16]  659 	ret
+                                    660 ;level.c:238: void p_level_room12 (void) __nonbanked
+                                    661 ;	---------------------------------
+                                    662 ; Function p_level_room12
+                                    663 ; ---------------------------------
+    00000326                        664 _p_level_room12::
+                                    665 ;level.c:240: if (v_smk == 162) {
+    00000326 FAr00r00         [16]  666 	ld	a, (#_v_smk)
+    00000329 D6 A2            [ 8]  667 	sub	a, #0xa2
+    0000032B 20 19            [12]  668 	jr	NZ, 00104$
+                                    669 ;level.c:241: p_engine_loadMap (room11);
+    0000032D 11r00r00         [12]  670 	ld	de, #_room11+0
+    00000330 D5               [16]  671 	push	de
+    00000331 CDr00r00         [24]  672 	call	_p_engine_loadMap
+    00000334 D1               [12]  673 	pop	de
+                                    674 ;level.c:242: p_engine_showMap (room11);
+    00000335 CDr00r00         [24]  675 	call	_p_engine_showMap
+                                    676 ;level.c:243: p_level_changeRoom (11, 152, v_syk);	
+    00000338 FAr00r00         [16]  677 	ld	a, (_v_syk)
+    0000033B F5               [16]  678 	push	af
+    0000033C 33               [ 8]  679 	inc	sp
+    0000033D 1E 98            [ 8]  680 	ld	e, #0x98
+    0000033F 3E 0B            [ 8]  681 	ld	a, #0x0b
+    00000341 CDr06r00         [24]  682 	call	_p_level_changeRoom
+    00000344 18 1F            [12]  683 	jr	00105$
+    00000346                        684 00104$:
+                                    685 ;level.c:245: else if (v_smk == 245) {
+    00000346 FAr00r00         [16]  686 	ld	a, (#_v_smk)
+    00000349 D6 F5            [ 8]  687 	sub	a, #0xf5
+    0000034B 20 18            [12]  688 	jr	NZ, 00105$
+                                    689 ;level.c:246: p_engine_loadMap (room13);
+    0000034D 11r00r00         [12]  690 	ld	de, #_room13
+    00000350 D5               [16]  691 	push	de
+    00000351 CDr00r00         [24]  692 	call	_p_engine_loadMap
+    00000354 D1               [12]  693 	pop	de
+                                    694 ;level.c:247: p_engine_showMap (room13);
+    00000355 CDr00r00         [24]  695 	call	_p_engine_showMap
+                                    696 ;level.c:248: p_level_changeRoom (13, v_sxk, 24);	
+    00000358 3E 18            [ 8]  697 	ld	a, #0x18
+    0000035A F5               [16]  698 	push	af
+    0000035B 33               [ 8]  699 	inc	sp
+    0000035C FAr00r00         [16]  700 	ld	a, (_v_sxk)
+    0000035F 5F               [ 4]  701 	ld	e, a
+    00000360 3E 0D            [ 8]  702 	ld	a, #0x0d
+    00000362 CDr06r00         [24]  703 	call	_p_level_changeRoom
+    00000365                        704 00105$:
+                                    705 ;level.c:251: p_umgebung_truheUhr (63, 4);
+    00000365 1E 04            [ 8]  706 	ld	e, #0x04
+    00000367 3E 3F            [ 8]  707 	ld	a, #0x3f
+                                    708 ;level.c:253: }
+    00000369 C3r00r00         [16]  709 	jp	_p_umgebung_truheUhr
+                                    710 ;level.c:256: void p_level_room13 (void) __nonbanked
+                                    711 ;	---------------------------------
+                                    712 ; Function p_level_room13
+                                    713 ; ---------------------------------
+    0000036C                        714 _p_level_room13::
+                                    715 ;level.c:258: if (v_smk == 11) {
+    0000036C FAr00r00         [16]  716 	ld	a, (#_v_smk)
+    0000036F D6 0B            [ 8]  717 	sub	a, #0x0b
+    00000371 20 19            [12]  718 	jr	NZ, 00104$
+                                    719 ;level.c:259: p_engine_loadMap (room12);
+    00000373 11r00r00         [12]  720 	ld	de, #_room12+0
+    00000376 D5               [16]  721 	push	de
+    00000377 CDr00r00         [24]  722 	call	_p_engine_loadMap
+    0000037A D1               [12]  723 	pop	de
+                                    724 ;level.c:260: p_engine_showMap (room12);
+    0000037B CDr00r00         [24]  725 	call	_p_engine_showMap
+                                    726 ;level.c:261: p_level_changeRoom (12, v_sxk, 128);		
+    0000037E 3E 80            [ 8]  727 	ld	a, #0x80
+    00000380 F5               [16]  728 	push	af
+    00000381 33               [ 8]  729 	inc	sp
+    00000382 FAr00r00         [16]  730 	ld	a, (_v_sxk)
+    00000385 5F               [ 4]  731 	ld	e, a
+    00000386 3E 0C            [ 8]  732 	ld	a, #0x0c
+    00000388 CDr06r00         [24]  733 	call	_p_level_changeRoom
+    0000038B C9               [16]  734 	ret
+    0000038C                        735 00104$:
+                                    736 ;level.c:263: else if (v_smk == 125) {
+    0000038C FAr00r00         [16]  737 	ld	a, (#_v_smk)
+    0000038F D6 7D            [ 8]  738 	sub	a, #0x7d
+    00000391 C0               [20]  739 	ret	NZ
+                                    740 ;level.c:264: p_engine_loadMap (room14);
+    00000392 11r00r00         [12]  741 	ld	de, #_room14
+    00000395 D5               [16]  742 	push	de
+    00000396 CDr00r00         [24]  743 	call	_p_engine_loadMap
+    00000399 D1               [12]  744 	pop	de
+                                    745 ;level.c:265: p_engine_showMap (room14);
+    0000039A CDr00r00         [24]  746 	call	_p_engine_showMap
+                                    747 ;level.c:266: p_level_changeRoom (14, 16, v_syk);	
+    0000039D FAr00r00         [16]  748 	ld	a, (_v_syk)
+    000003A0 F5               [16]  749 	push	af
+    000003A1 33               [ 8]  750 	inc	sp
+    000003A2 1E 10            [ 8]  751 	ld	e, #0x10
+    000003A4 3E 0E            [ 8]  752 	ld	a, #0x0e
+    000003A6 CDr06r00         [24]  753 	call	_p_level_changeRoom
+                                    754 ;level.c:268: }
+    000003A9 C9               [16]  755 	ret
+                                    756 ;level.c:271: void p_level_room14 (void) __nonbanked
+                                    757 ;	---------------------------------
+                                    758 ; Function p_level_room14
+                                    759 ; ---------------------------------
+    000003AA                        760 _p_level_room14::
+                                    761 ;level.c:273: if (v_smk == 162) {
+    000003AA FAr00r00         [16]  762 	ld	a, (#_v_smk)
+    000003AD D6 A2            [ 8]  763 	sub	a, #0xa2
+    000003AF 20 18            [12]  764 	jr	NZ, 00104$
+                                    765 ;level.c:274: p_engine_loadMap (room13);
+    000003B1 11r00r00         [12]  766 	ld	de, #_room13+0
+    000003B4 D5               [16]  767 	push	de
+    000003B5 CDr00r00         [24]  768 	call	_p_engine_loadMap
+    000003B8 D1               [12]  769 	pop	de
+                                    770 ;level.c:275: p_engine_showMap (room13);
+    000003B9 CDr00r00         [24]  771 	call	_p_engine_showMap
+                                    772 ;level.c:276: p_level_changeRoom (13, 152, v_syk);	
+    000003BC FAr00r00         [16]  773 	ld	a, (_v_syk)
+    000003BF F5               [16]  774 	push	af
+    000003C0 33               [ 8]  775 	inc	sp
+    000003C1 1E 98            [ 8]  776 	ld	e, #0x98
+    000003C3 3E 0D            [ 8]  777 	ld	a, #0x0d
+    000003C5 CDr06r00         [24]  778 	call	_p_level_changeRoom
+    000003C8 C9               [16]  779 	ret
+    000003C9                        780 00104$:
+                                    781 ;level.c:278: else if (v_smk == 125) {
+    000003C9 FAr00r00         [16]  782 	ld	a, (#_v_smk)
+    000003CC D6 7D            [ 8]  783 	sub	a, #0x7d
+    000003CE C0               [20]  784 	ret	NZ
+                                    785 ;level.c:279: p_engine_loadMap (room15);
+    000003CF 11r00r00         [12]  786 	ld	de, #_room15
+    000003D2 D5               [16]  787 	push	de
+    000003D3 CDr00r00         [24]  788 	call	_p_engine_loadMap
+    000003D6 D1               [12]  789 	pop	de
+                                    790 ;level.c:280: p_engine_showMap (room15);
+    000003D7 CDr00r00         [24]  791 	call	_p_engine_showMap
+                                    792 ;level.c:281: p_level_changeRoom (15, 16, v_syk);	
+    000003DA FAr00r00         [16]  793 	ld	a, (_v_syk)
+    000003DD F5               [16]  794 	push	af
+    000003DE 33               [ 8]  795 	inc	sp
+    000003DF 1E 10            [ 8]  796 	ld	e, #0x10
+    000003E1 3E 0F            [ 8]  797 	ld	a, #0x0f
+    000003E3 CDr06r00         [24]  798 	call	_p_level_changeRoom
+                                    799 ;level.c:283: }
+    000003E6 C9               [16]  800 	ret
+                                    801 ;level.c:286: void p_level_room17 (void) __nonbanked
+                                    802 ;	---------------------------------
+                                    803 ; Function p_level_room17
+                                    804 ; ---------------------------------
+    000003E7                        805 _p_level_room17::
+                                    806 ;level.c:288: if (v_smk == 72) {
+    000003E7 FAr00r00         [16]  807 	ld	a, (#_v_smk)
+    000003EA D6 48            [ 8]  808 	sub	a, #0x48
+    000003EC 20 17            [12]  809 	jr	NZ, 00102$
+                                    810 ;level.c:289: p_engine_loadMap (room6);
+    000003EE 11r00r00         [12]  811 	ld	de, #_room6+0
+    000003F1 D5               [16]  812 	push	de
+    000003F2 CDr00r00         [24]  813 	call	_p_engine_loadMap
+    000003F5 D1               [12]  814 	pop	de
+                                    815 ;level.c:290: p_engine_showMap (room6);
+    000003F6 CDr00r00         [24]  816 	call	_p_engine_showMap
+                                    817 ;level.c:292: p_level_changeRoom (6, 152, v_syk);
+    000003F9 FAr00r00         [16]  818 	ld	a, (_v_syk)
+    000003FC F5               [16]  819 	push	af
+    000003FD 33               [ 8]  820 	inc	sp
+    000003FE 1E 98            [ 8]  821 	ld	e, #0x98
+    00000400 3E 06            [ 8]  822 	ld	a, #0x06
+    00000402 CDr06r00         [24]  823 	call	_p_level_changeRoom
+    00000405                        824 00102$:
+                                    825 ;level.c:294: p_umgebung_schild (142, schild2);
+    00000405 11r00r00         [12]  826 	ld	de, #_schild2
+    00000408 3E 8E            [ 8]  827 	ld	a, #0x8e
+                                    828 ;level.c:295: }
+    0000040A C3r00r00         [16]  829 	jp	_p_umgebung_schild
+                                    830 ;level.c:299: void p_level_control (void) __nonbanked
+                                    831 ;	---------------------------------
+                                    832 ; Function p_level_control
+                                    833 ; ---------------------------------
+    0000040D                        834 _p_level_control::
+                                    835 ;level.c:301: if (v_room == 1) p_level_room1 ();
+    0000040D FAr00r00         [16]  836 	ld	a, (#_v_room)
+    00000410 3D               [ 4]  837 	dec	a
+    00000411 CAr4Cr00         [16]  838 	jp	Z, _p_level_room1
+                                    839 ;level.c:302: else if (v_room == 2) p_level_room2 ();
+    00000414 FAr00r00         [16]  840 	ld	a, (#_v_room)
+    00000417 D6 02            [ 8]  841 	sub	a, #0x02
+    00000419 CAr73r00         [16]  842 	jp	Z, _p_level_room2
+                                    843 ;level.c:303: else if (v_room == 3) p_level_room3 ();
+    0000041C FAr00r00         [16]  844 	ld	a, (#_v_room)
+    0000041F D6 03            [ 8]  845 	sub	a, #0x03
+    00000421 CArCBr00         [16]  846 	jp	Z, _p_level_room3
+                                    847 ;level.c:304: else if (v_room == 4) p_level_room4 ();
+    00000424 FAr00r00         [16]  848 	ld	a, (#_v_room)
+    00000427 D6 04            [ 8]  849 	sub	a, #0x04
+    00000429 CAr09r01         [16]  850 	jp	Z, _p_level_room4
+                                    851 ;level.c:305: else if (v_room == 5) p_level_room5 ();
+    0000042C FAr00r00         [16]  852 	ld	a, (#_v_room)
+    0000042F D6 05            [ 8]  853 	sub	a, #0x05
+    00000431 CAr46r01         [16]  854 	jp	Z, _p_level_room5
+                                    855 ;level.c:306: else if (v_room == 6) p_level_room6 ();
+    00000434 FAr00r00         [16]  856 	ld	a, (#_v_room)
+    00000437 D6 06            [ 8]  857 	sub	a, #0x06
+    00000439 CAr8Cr01         [16]  858 	jp	Z, _p_level_room6
+                                    859 ;level.c:307: else if (v_room == 7) p_level_room7 ();
+    0000043C FAr00r00         [16]  860 	ld	a, (#_v_room)
+    0000043F D6 07            [ 8]  861 	sub	a, #0x07
+    00000441 CArE9r01         [16]  862 	jp	Z, _p_level_room7
+                                    863 ;level.c:308: else if (v_room == 8) p_level_room8 ();
+    00000444 FAr00r00         [16]  864 	ld	a, (#_v_room)
+    00000447 D6 08            [ 8]  865 	sub	a, #0x08
+    00000449 CAr26r02         [16]  866 	jp	Z, _p_level_room8
+                                    867 ;level.c:309: else if (v_room == 9) p_level_room9 ();
+    0000044C FAr00r00         [16]  868 	ld	a, (#_v_room)
+    0000044F D6 09            [ 8]  869 	sub	a, #0x09
+    00000451 CAr64r02         [16]  870 	jp	Z, _p_level_room9
+                                    871 ;level.c:310: else if (v_room == 10) p_level_room10 ();
+    00000454 FAr00r00         [16]  872 	ld	a, (#_v_room)
+    00000457 D6 0A            [ 8]  873 	sub	a, #0x0a
+    00000459 CArABr02         [16]  874 	jp	Z, _p_level_room10
+                                    875 ;level.c:311: else if (v_room == 11) p_level_room11 ();
+    0000045C FAr00r00         [16]  876 	ld	a, (#_v_room)
+    0000045F D6 0B            [ 8]  877 	sub	a, #0x0b
+    00000461 CArE9r02         [16]  878 	jp	Z, _p_level_room11
+                                    879 ;level.c:312: else if (v_room == 12) p_level_room12 ();
+    00000464 FAr00r00         [16]  880 	ld	a, (#_v_room)
+    00000467 D6 0C            [ 8]  881 	sub	a, #0x0c
+    00000469 CAr26r03         [16]  882 	jp	Z, _p_level_room12
+                                    883 ;level.c:313: else if (v_room == 13) p_level_room13 ();
+    0000046C FAr00r00         [16]  884 	ld	a, (#_v_room)
+    0000046F D6 0D            [ 8]  885 	sub	a, #0x0d
+    00000471 CAr6Cr03         [16]  886 	jp	Z, _p_level_room13
+                                    887 ;level.c:314: else if (v_room == 14) p_level_room14 ();
+    00000474 FAr00r00         [16]  888 	ld	a, (#_v_room)
+    00000477 D6 0E            [ 8]  889 	sub	a, #0x0e
+    00000479 CArAAr03         [16]  890 	jp	Z, _p_level_room14
+                                    891 ;level.c:316: else if (v_room == 17) p_level_room17 ();
+    0000047C FAr00r00         [16]  892 	ld	a, (#_v_room)
+    0000047F D6 11            [ 8]  893 	sub	a, #0x11
+    00000481 CArE7r03         [16]  894 	jp	Z, _p_level_room17
+                                    895 ;level.c:317: }
+    00000484 C9               [16]  896 	ret
+                                    897 	.area _HOME
+                                    898 ;--------------------------------------------------------
+                                    899 ; code
+                                    900 ;--------------------------------------------------------
+                                    901 	.area _CODE
+                                    902 	.area _CODE
+                                    903 	.area _INITIALIZER
+                                    904 	.area _CABS (ABS)

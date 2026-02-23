@@ -1,0 +1,189 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.1 #15267 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module vampkiller
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _p_level_control
+                                     11 	.globl _p_gegner_move
+                                     12 	.globl _p_cdesign_showYK
+                                     13 	.globl _p_cdesign_showXK
+                                     14 	.globl _p_cdesign_showMapKoord
+                                     15 	.globl _p_cdesign_showTime
+                                     16 	.globl _p_player_attack
+                                     17 	.globl _p_player_move
+                                     18 	.globl _p_init_stage_2
+                                     19 	.globl _p_init_stage_1
+                                     20 	.globl _wait_vbl_done
+                                     21 	.globl _joypad
+                                     22 	.globl _main
+                                     23 ;--------------------------------------------------------
+                                     24 ; special function registers
+                                     25 ;--------------------------------------------------------
+                                     26 	.area _HRAM
+                                     27 ;--------------------------------------------------------
+                                     28 ; ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area _DATA
+                                     31 ;--------------------------------------------------------
+                                     32 ; ram data
+                                     33 ;--------------------------------------------------------
+                                     34 	.area _INITIALIZED
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area _DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area _HOME
+                                     43 	.area _GSINIT
+                                     44 	.area _GSFINAL
+                                     45 	.area _GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area _HOME
+                                     50 ;vampkiller.c:30: void main (void) __nonbanked
+                                     51 ;	---------------------------------
+                                     52 ; Function main
+                                     53 ; ---------------------------------
+    00000000                         54 _main::
+                                     55 ;vampkiller.c:32: p_init_stage_1 ();
+    00000000 CDr00r00         [24]   56 	call	_p_init_stage_1
+                                     57 ;vampkiller.c:33: p_init_stage_2 ();
+    00000003 CDr00r00         [24]   58 	call	_p_init_stage_2
+                                     59 ;vampkiller.c:35: v_angriffstimer = 0;
+    00000006 AF               [ 4]   60 	xor	a, a
+    00000007 EAr00r00         [16]   61 	ld	(#_v_angriffstimer),a
+                                     62 ;vampkiller.c:38: while (v_gameover == FALSE)
+    0000000A                         63 00127$:
+    0000000A FAr00r00         [16]   64 	ld	a, (#_v_gameover)
+    0000000D B7               [ 4]   65 	or	a, a
+    0000000E C0               [20]   66 	ret	NZ
+                                     67 ;vampkiller.c:41: if (v_movetimer == 7) {
+    0000000F FAr00r00         [16]   68 	ld	a, (#_v_movetimer)
+    00000012 D6 07            [ 8]   69 	sub	a, #0x07
+    00000014 20 42            [12]   70 	jr	NZ, 00113$
+                                     71 ;vampkiller.c:42: if (joypad () & J_UP) p_player_move (UP);
+    00000016 CDr00r00         [24]   72 	call	_joypad
+    00000019 CB 57            [ 8]   73 	bit	2, a
+    0000001B 28 07            [12]   74 	jr	Z, 00110$
+    0000001D 3E 01            [ 8]   75 	ld	a, #0x01
+    0000001F CDr00r00         [24]   76 	call	_p_player_move
+    00000022 18 27            [12]   77 	jr	00111$
+    00000024                         78 00110$:
+                                     79 ;vampkiller.c:43: else if (joypad () & J_DOWN) p_player_move (DOWN);
+    00000024 CDr00r00         [24]   80 	call	_joypad
+    00000027 CB 5F            [ 8]   81 	bit	3, a
+    00000029 28 07            [12]   82 	jr	Z, 00107$
+    0000002B 3E 02            [ 8]   83 	ld	a, #0x02
+    0000002D CDr00r00         [24]   84 	call	_p_player_move
+    00000030 18 19            [12]   85 	jr	00111$
+    00000032                         86 00107$:
+                                     87 ;vampkiller.c:44: else if (joypad () & J_LEFT) p_player_move (LEFT);
+    00000032 CDr00r00         [24]   88 	call	_joypad
+    00000035 CB 4F            [ 8]   89 	bit	1, a
+    00000037 28 07            [12]   90 	jr	Z, 00104$
+    00000039 3E 03            [ 8]   91 	ld	a, #0x03
+    0000003B CDr00r00         [24]   92 	call	_p_player_move
+    0000003E 18 0B            [12]   93 	jr	00111$
+    00000040                         94 00104$:
+                                     95 ;vampkiller.c:45: else if (joypad () & J_RIGHT) p_player_move (RIGHT);
+    00000040 CDr00r00         [24]   96 	call	_joypad
+    00000043 0F               [ 4]   97 	rrca
+    00000044 30 05            [12]   98 	jr	NC, 00111$
+    00000046 3E 04            [ 8]   99 	ld	a, #0x04
+    00000048 CDr00r00         [24]  100 	call	_p_player_move
+    0000004B                        101 00111$:
+                                    102 ;vampkiller.c:47: v_movetimer = 0;
+    0000004B AF               [ 4]  103 	xor	a, a
+    0000004C EAr00r00         [16]  104 	ld	(#_v_movetimer),a
+                                    105 ;vampkiller.c:48: p_cdesign_showMapKoord ();
+    0000004F CDr00r00         [24]  106 	call	_p_cdesign_showMapKoord
+                                    107 ;vampkiller.c:49: p_cdesign_showXK ();
+    00000052 CDr00r00         [24]  108 	call	_p_cdesign_showXK
+                                    109 ;vampkiller.c:50: p_cdesign_showYK ();
+    00000055 CDr00r00         [24]  110 	call	_p_cdesign_showYK
+    00000058                        111 00113$:
+                                    112 ;vampkiller.c:53: if ((joypad () & J_A) && (v_angriff == FALSE)) {
+    00000058 CDr00r00         [24]  113 	call	_joypad
+    0000005B CB 67            [ 8]  114 	bit	4, a
+    0000005D 28 0C            [12]  115 	jr	Z, 00115$
+    0000005F FAr00r00         [16]  116 	ld	a, (#_v_angriff)
+    00000062 B7               [ 4]  117 	or	a, a
+    00000063 20 06            [12]  118 	jr	NZ, 00115$
+                                    119 ;vampkiller.c:54: p_level_control ();
+    00000065 CDr00r00         [24]  120 	call	_p_level_control
+                                    121 ;vampkiller.c:56: p_player_attack ();
+    00000068 CDr00r00         [24]  122 	call	_p_player_attack
+    0000006B                        123 00115$:
+                                    124 ;vampkiller.c:64: if (v_angriffstimer == 8) {
+    0000006B FAr00r00         [16]  125 	ld	a, (#_v_angriffstimer)
+    0000006E D6 08            [ 8]  126 	sub	a, #0x08
+    00000070 20 0A            [12]  127 	jr	NZ, 00118$
+                                    128 ;/opt/gbdk/include/gb/gb.h:1973: OAM_item_t * itm = &shadow_OAM[nb];
+    00000072 21r04r00         [12]  129 	ld	hl, #(_shadow_OAM + 4)
+                                    130 ;/opt/gbdk/include/gb/gb.h:1974: itm->y=y, itm->x=x;
+    00000075 AF               [ 4]  131 	xor	a, a
+    00000076 22               [ 8]  132 	ld	(hl+), a
+    00000077 77               [ 8]  133 	ld	(hl), a
+                                    134 ;vampkiller.c:65: move_sprite (1, 0, 0); v_angriff = FALSE;
+    00000078 AF               [ 4]  135 	xor	a, a
+    00000079 EAr00r00         [16]  136 	ld	(#_v_angriff),a
+    0000007C                        137 00118$:
+                                    138 ;vampkiller.c:68: if (v_gegnertimer == 9) {
+    0000007C FAr00r00         [16]  139 	ld	a, (#_v_gegnertimer)
+    0000007F D6 09            [ 8]  140 	sub	a, #0x09
+    00000081 20 03            [12]  141 	jr	NZ, 00120$
+                                    142 ;vampkiller.c:69: p_gegner_move ();
+    00000083 CDr00r00         [24]  143 	call	_p_gegner_move
+    00000086                        144 00120$:
+                                    145 ;vampkiller.c:72: if (v_angriff == TRUE) v_angriffstimer++;
+    00000086 FAr00r00         [16]  146 	ld	a, (#_v_angriff)
+    00000089 3D               [ 4]  147 	dec	a
+    0000008A 20 04            [12]  148 	jr	NZ, 00122$
+    0000008C 21r00r00         [12]  149 	ld	hl, #_v_angriffstimer
+    0000008F 34               [12]  150 	inc	(hl)
+    00000090                        151 00122$:
+                                    152 ;vampkiller.c:74: if (v_gegnertimer < 255) v_gegnertimer++;
+    00000090 21r00r00         [12]  153 	ld	hl, #_v_gegnertimer
+    00000093 7E               [ 8]  154 	ld	a, (hl)
+    00000094 D6 FF            [ 8]  155 	sub	a, #0xff
+    00000096 30 01            [12]  156 	jr	NC, 00124$
+    00000098 34               [12]  157 	inc	(hl)
+    00000099                        158 00124$:
+                                    159 ;vampkiller.c:76: ++v_movetimer;
+    00000099 21r00r00         [12]  160 	ld	hl, #_v_movetimer
+    0000009C 34               [12]  161 	inc	(hl)
+                                    162 ;vampkiller.c:77: ++v_timertimer;
+    0000009D 21r00r00         [12]  163 	ld	hl, #_v_timertimer
+    000000A0 34               [12]  164 	inc	(hl)
+                                    165 ;vampkiller.c:79: if (v_timertimer == 100) {
+    000000A1 7E               [ 8]  166 	ld	a, (hl)
+    000000A2 D6 64            [ 8]  167 	sub	a, #0x64
+    000000A4 20 0B            [12]  168 	jr	NZ, 00126$
+                                    169 ;vampkiller.c:80: --v_time;
+    000000A6 21r00r00         [12]  170 	ld	hl, #_v_time
+    000000A9 35               [12]  171 	dec	(hl)
+                                    172 ;vampkiller.c:81: p_cdesign_showTime ();
+    000000AA CDr00r00         [24]  173 	call	_p_cdesign_showTime
+                                    174 ;vampkiller.c:82: v_timertimer = 0;
+    000000AD AF               [ 4]  175 	xor	a, a
+    000000AE EAr00r00         [16]  176 	ld	(#_v_timertimer),a
+    000000B1                        177 00126$:
+                                    178 ;vampkiller.c:84: wait_vbl_done ();
+    000000B1 CDr00r00         [24]  179 	call	_wait_vbl_done
+                                    180 ;vampkiller.c:86: }
+    000000B4 C3r0Ar00         [16]  181 	jp	00127$
+                                    182 	.area _HOME
+                                    183 ;--------------------------------------------------------
+                                    184 ; code
+                                    185 ;--------------------------------------------------------
+                                    186 	.area _CODE
+                                    187 	.area _CODE
+                                    188 	.area _INITIALIZER
+                                    189 	.area _CABS (ABS)

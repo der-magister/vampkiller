@@ -1,0 +1,54 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+  2 _v_action                                                       00000002 GR
+  2 _v_angriff                                                      00000001 GR
+  2 _v_angriffstimer                                                00000004 GR
+  2 _v_gameover                                                     00000000 GR
+  2 _v_gegnertimer                                                  00000005 GR
+  2 _v_glp                                                          00000209 GR
+  2 _v_gmk                                                          00000218 GR
+  2 _v_gri                                                          0000021D GR
+  2 _v_gxk                                                          0000020E GR
+  2 _v_gyk                                                          00000213 GR
+  2 _v_kiste                                                        00000222 GR
+  0 _v_kolidat                                                      00000000 GR
+  2 _v_lvldat                                                       00000009 GR
+  2 _v_lvldatmod                                                    00000105 GR
+  2 _v_movetimer                                                    00000003 GR
+  2 _v_pflock                                                       00000204 GR
+  2 _v_room                                                         00000007 GR
+  2 _v_skey                                                         00000202 GR
+  2 _v_slp                                                          00000201 GR
+  2 _v_smk                                                          00000207 GR
+  2 _v_sri                                                          00000208 GR
+  2 _v_sweih                                                        00000203 GR
+  2 _v_sxk                                                          00000205 GR
+  2 _v_syk                                                          00000206 GR
+  2 _v_time                                                         00000008 GR
+  2 _v_timertimer                                                   00000006 GR
+  2 _v_tuer                                                         00000227 GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size        4   flags    0
+   1 _HRAM                                      size        0   flags    0
+   2 _DATA                                      size      22A   flags    0
+   3 _INITIALIZED                               size        0   flags    0
+   4 _DABS                                      size        0   flags    8
+   5 _HOME                                      size        0   flags    0
+   6 _GSINIT                                    size        0   flags    0
+   7 _GSFINAL                                   size        0   flags    0
+   8 _INITIALIZER                               size        0   flags    0
+   9 _CABS                                      size        0   flags    8
+

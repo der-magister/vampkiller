@@ -1,0 +1,46 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    _p_engine_calcCoord                                             ******** GX
+  5 _p_player_attack                                                0000011C GR
+  5 _p_player_init                                                  00000000 GR
+  5 _p_player_move                                                  00000063 GR
+  5 _p_player_setSprite                                             0000002C GR
+    _shadow_OAM                                                     ******** GX
+    _v_action                                                       ******** GX
+    _v_angriff                                                      ******** GX
+    _v_angriffstimer                                                ******** GX
+    _v_kolidat                                                      ******** GX
+    _v_lvldat                                                       ******** GX
+    _v_pflock                                                       ******** GX
+  5 _v_player_kolision                                              00000048 GR
+    _v_skey                                                         ******** GX
+    _v_slp                                                          ******** GX
+    _v_smk                                                          ******** GX
+    _v_sri                                                          ******** GX
+    _v_sweih                                                        ******** GX
+    _v_sxk                                                          ******** GX
+    _v_syk                                                          ******** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size        0   flags    0
+   1 _HRAM                                      size        0   flags    0
+   2 _DATA                                      size        0   flags    0
+   3 _INITIALIZED                               size        0   flags    0
+   4 _DABS                                      size        0   flags    8
+   5 _HOME                                      size      183   flags    0
+   6 _GSINIT                                    size        0   flags    0
+   7 _GSFINAL                                   size        0   flags    0
+   8 _INITIALIZER                               size        0   flags    0
+   9 _CABS                                      size        0   flags    8
+

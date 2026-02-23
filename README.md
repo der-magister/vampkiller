@@ -20,8 +20,8 @@ GPL 2.0
 
 System: Gameboy
 
-gbdk-2020
+gbdk-2020 getestet mit 4.3.0 und 4.5.0
 
 heiko.wolf[dot]mail[@]gmail.com
 
-2024-2025
+2024-2026

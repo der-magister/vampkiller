@@ -1,0 +1,55 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    _eispflock                                                      ******** GX
+    _herz                                                           ******** GX
+    _leer                                                           ******** GX
+    _nichtnuetzlich                                                 ******** GX
+    _p_cdesign_showKey                                              ******** GX
+    _p_cdesign_showLP                                               ******** GX
+    _p_cdesign_showTime                                             ******** GX
+    _p_cdesign_showWeihwasser                                       ******** GX
+    _p_text_viewTXT                                                 ******** GX
+  5 _p_umgebung_disables                                            0000019A GR
+  5 _p_umgebung_schild                                              00000000 GR
+  5 _p_umgebung_truheEispflock                                      00000008 GR
+  5 _p_umgebung_truheHerz                                           0000009F GR
+  5 _p_umgebung_truheSchluessel                                     000000F4 GR
+  5 _p_umgebung_truheUhr                                            00000144 GR
+  5 _p_umgebung_truheWeihwasser                                     0000004A GR
+  5 _p_umgebung_tuerzu                                              0000008B GR
+    _schluessel                                                     ******** GX
+    _tuerzu                                                         ******** GX
+    _uhr                                                            ******** GX
+    _v_kiste                                                        ******** GX
+    _v_pflock                                                       ******** GX
+    _v_skey                                                         ******** GX
+    _v_slp                                                          ******** GX
+    _v_smk                                                          ******** GX
+    _v_sweih                                                        ******** GX
+    _v_time                                                         ******** GX
+    _v_tuer                                                         ******** GX
+    _weihwasser                                                     ******** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy)                  Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size        0   flags    0
+   1 _HRAM                                      size        0   flags    0
+   2 _DATA                                      size        0   flags    0
+   3 _INITIALIZED                               size        0   flags    0
+   4 _DABS                                      size        0   flags    8
+   5 _HOME                                      size      19B   flags    0
+   6 _GSINIT                                    size        0   flags    0
+   7 _GSFINAL                                   size        0   flags    0
+   8 _INITIALIZER                               size        0   flags    0
+   9 _CABS                                      size        0   flags    8
+
