@@ -1,6 +1,6 @@
 //   Vampkiller
 //
-//   Copyright (C) 2024-2026 Heiko Wolf
+//   Copyright (C) 2024-2025 Heiko Wolf
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License As published by
@@ -18,17 +18,20 @@
 //
 //   Kontakt: heiko.wolf.mail@gmail.com
 
-//   File: player.h
+//   File: aktionen.c
 
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#include "aktionen.h"
+#include "engine.h"
+#include "cdesign.h"
 
-#include "globals.h"
+//Weihwasser an Spielerposition werfen
+void p_use_weihwasser (void) __nonbanked
+{
+	if (v_sweih > 0) {
+		v_tile [1] = 59;
+		v_sweih -= 1;
 
-extern void p_player_init (void) __nonbanked;
-extern void p_player_setSprite (void) __nonbanked;
-extern uint8_t v_player_kolision (unsigned char l_tile) __nonbanked;
-extern void p_player_move (uint8_t l_ri) __nonbanked;
-extern void p_player_attack (void) __nonbanked;
-
-#endif
+		p_engine_setTile ();
+		p_cdesign_showWeihwasser ();
+	}
+}

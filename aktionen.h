@@ -1,6 +1,6 @@
 //   Vampkiller
 //
-//   Copyright (C) 2024-2026 Heiko Wolf
+//   Copyright (C) 2024-2025 Heiko Wolf
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License As published by
@@ -18,17 +18,13 @@
 //
 //   Kontakt: heiko.wolf.mail@gmail.com
 
-//   File: player.h
+//   File: aktionen.h
 
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#ifndef _AKTIONEN_H_
+#define _AKTIONEN_H_
 
 #include "globals.h"
 
-extern void p_player_init (void) __nonbanked;
-extern void p_player_setSprite (void) __nonbanked;
-extern uint8_t v_player_kolision (unsigned char l_tile) __nonbanked;
-extern void p_player_move (uint8_t l_ri) __nonbanked;
-extern void p_player_attack (void) __nonbanked;
+extern void p_use_weihwasser (void) __nonbanked;
 
 #endif
