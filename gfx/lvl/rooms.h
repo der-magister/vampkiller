@@ -42,5 +42,7 @@ extern const unsigned char room16[252];
 extern const unsigned char room17[252];
 extern const unsigned char room18[252];
 extern const unsigned char room19[252];
+extern const unsigned char room20[252];
+extern const unsigned char room21[252];
 
 #endif

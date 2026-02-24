@@ -1,6 +1,6 @@
 //   Vampkiller
 //
-//   Copyright (C) 2024-2026Heiko Wolf
+//   Copyright (C) 2024-2026 Heiko Wolf
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License As published by
@@ -308,7 +308,7 @@ void p_level_room16 (void) __nonbanked
 	else if (v_smk == 7) {
 		p_engine_loadMap (room18);
 		p_engine_showMap (room18);
-		p_level_changeRoom (18, 152, v_syk);
+		p_level_changeRoom (18, v_sxk, 128);
 	}
 }
 
@@ -337,8 +337,18 @@ void p_level_room18 (void) __nonbanked
 		p_engine_loadMap (room19);
 		p_engine_showMap (room19);
 
-		p_level_changeRoom (19, v_sxk, v_syk);
+		p_level_changeRoom (19, 152, v_syk);
 	}	
+}
+
+void p_level_room19 (void) __nonbanked
+{
+	if (v_smk == 125) {
+		p_engine_loadMap (room18);
+		p_engine_showMap (room18);
+
+		p_level_changeRoom (16, v_sxk, v_sxk);
+	}
 }
 
 //Levelkontrolle
@@ -362,4 +372,5 @@ void p_level_control (void) __nonbanked
 	else if (v_room == 16) p_level_room16 ();
 	else if (v_room == 17) p_level_room17 ();
 	else if (v_room == 18) p_level_room18 ();
+	else if (v_room == 19) p_level_room19 ();
 }
