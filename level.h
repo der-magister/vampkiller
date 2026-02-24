@@ -42,7 +42,9 @@ extern void p_level_room12 (void) __nonbanked;
 extern void p_level_room13 (void) __nonbanked;
 extern void p_level_room14 (void) __nonbanked;
 extern void p_level_room15 (void) __nonbanked;
+extern void p_level_room16 (void) __nonbanked;
 extern void p_level_room17 (void) __nonbanked;
+extern void p_level_room18 (void) __nonbanked;
 extern void p_level_control (void) __nonbanked;
 
 #endif

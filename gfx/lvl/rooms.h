@@ -38,7 +38,9 @@ extern const unsigned char room12[252];
 extern const unsigned char room13[252];
 extern const unsigned char room14[252];
 extern const unsigned char room15[252];
-
+extern const unsigned char room16[252];
 extern const unsigned char room17[252];
+extern const unsigned char room18[252];
+extern const unsigned char room19[252];
 
 #endif

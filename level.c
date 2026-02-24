@@ -1,6 +1,6 @@
 //   Vampkiller
 //
-//   Copyright (C) 2024-2025 Heiko Wolf
+//   Copyright (C) 2024-2026Heiko Wolf
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License As published by
@@ -151,7 +151,7 @@ void p_level_room6 (void) __nonbanked
 	else if (v_smk == 89) {
 		p_engine_loadMap (room17);
 		p_engine_showMap (room17);
-		p_level_changeRoom (17, 72, v_syk);	
+		p_level_changeRoom (17, 16, v_syk);	
 	}
 }
 
@@ -270,7 +270,7 @@ void p_level_room13 (void) __nonbanked
 //Raum 14 spezifische Aspekte
 void p_level_room14 (void) __nonbanked
 {
-	if (v_smk == 162) {
+	if (v_smk == 108) {
 		p_engine_loadMap (room13);
 		p_engine_showMap (room13);
 		p_level_changeRoom (13, 152, v_syk);	
@@ -282,16 +282,35 @@ void p_level_room14 (void) __nonbanked
 	}	
 }
 
-//Raum 14 spezifische Aspekte
+//Raum 15 spezifische Aspekte
 void p_level_room15 (void) __nonbanked
 {
-	if (v_smk == 162) {
+	if (v_smk == 108) {
 		p_engine_loadMap (room14);
 		p_engine_showMap (room14);
 		p_level_changeRoom (14, 152, v_syk);	
 	}
+	if (v_smk == 7) {
+		p_engine_loadMap (room16);
+		p_engine_showMap (room16);
+		p_level_changeRoom (16, v_sxk, 128);	
+	}
 }
 
+//Raum 16 spezifische Aspekte
+void p_level_room16 (void) __nonbanked
+{
+	if (v_smk == 241) {
+		p_engine_loadMap (room15);
+		p_engine_showMap (room15);
+		p_level_changeRoom (15, v_sxk, 24);	
+	}
+	else if (v_smk == 7) {
+		p_engine_loadMap (room18);
+		p_engine_showMap (room18);
+		p_level_changeRoom (18, 152, v_syk);
+	}
+}
 
 //Raum 17 spezifische Aspekte
 void p_level_room17 (void) __nonbanked
@@ -305,6 +324,22 @@ void p_level_room17 (void) __nonbanked
 	p_umgebung_schild (142, schild2);
 }
 
+//Raum 18 spezifische Aspekte
+void p_level_room18 (void) __nonbanked
+{
+	if (v_smk == 241) {
+		p_engine_loadMap (room16);
+		p_engine_showMap (room16);
+
+		p_level_changeRoom (16, v_sxk, 24);
+	}
+	else if (v_smk == 108) {
+		p_engine_loadMap (room19);
+		p_engine_showMap (room19);
+
+		p_level_changeRoom (19, v_sxk, v_syk);
+	}	
+}
 
 //Levelkontrolle
 void p_level_control (void) __nonbanked
@@ -324,5 +359,7 @@ void p_level_control (void) __nonbanked
 	else if (v_room == 13) p_level_room13 ();
 	else if (v_room == 14) p_level_room14 ();
 	else if (v_room == 15) p_level_room15 ();
+	else if (v_room == 16) p_level_room16 ();
 	else if (v_room == 17) p_level_room17 ();
+	else if (v_room == 18) p_level_room18 ();
 }
