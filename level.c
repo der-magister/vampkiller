@@ -349,6 +349,9 @@ void p_level_room19 (void) __nonbanked
 
 		p_level_changeRoom (16, v_sxk, v_sxk);
 	}
+	p_umgebung_truheUhr (44, 5);
+	p_umgebung_truheWeihwasser (41, 6);
+	p_umgebung_truheHerz (38, 7);	
 }
 
 //Levelkontrolle

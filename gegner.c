@@ -159,4 +159,23 @@ void p_gegner_lvlset (void) __nonbanked
 		p_gegner_set (3, 2, 144, 48, 1, LEFT);
 		p_gegner_set (4, 2, 24, 112, 1, RIGHT);	
 	}
+	else if (v_room == 14) {
+		p_gegner_set (2, 4, 48, 32, 1, DOWN);
+		p_gegner_set (3, 1, 80, 120, 1, UP);
+		p_gegner_set (4, 4, 144, 104, 1, UP);
+	}
+	else if (v_room == 15) {
+		p_gegner_set (2, 2, 72, 80, 1, LEFT);
+		p_gegner_set (3, 1, 80, 32, 1, DOWN);
+	}
+	else if (v_room == 16) {
+		p_gegner_set (2, 2, 144, 96, 1, LEFT);
+		p_gegner_set (3, 4, 64, 32, 1, DOWN);	
+	}
+	else if (v_room == 18) {
+		p_gegner_set (2, 1, 144, 120, 1, LEFT);
+		p_gegner_set (3, 4, 136, 32, 1, LEFT);
+		p_gegner_set (4, 2, 32, 32, 1, DOWN);		
+	}
+	
 }

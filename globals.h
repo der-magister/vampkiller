@@ -78,7 +78,7 @@ extern uint8_t v_gmk [5];				//Map-Koordinate Gegner
 extern uint8_t v_gri [5];                               //Richtungsanzeige
 
 //umgebung
-extern uint8_t v_kiste [5];				//Kisten offen True / false
+extern uint8_t v_kiste [7];				//Kisten offen True / false
 extern uint8_t v_tuer [3];				// Tuer offen true / false			
 
 #endif

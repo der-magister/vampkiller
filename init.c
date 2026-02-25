@@ -40,7 +40,7 @@ void p_init_stage_1 (void) __nonbanked
 
 	//laden der Tilesets
 	p_engine_loadTileset (56, 127, fonttiles);
-	p_engine_loadSpriteset (0, 3, sprites);
+	p_engine_loadSpriteset (0, 4, sprites);
 
 	v_time = 255; v_gameover = FALSE; v_movetimer = 0; v_gegnertimer = 0; v_timertimer = 0;
 }

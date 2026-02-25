@@ -43,7 +43,7 @@ unsigned char v_lvldatmod [252];		//modifizierten Grafikdaten des aktuellen  Rau
 
 //Spielerdaten
 uint8_t v_slp;					//aktuelle Lebensenergie Spieler (max. 3)
-uint8_t v_skey;					//aktuelle Anzahl Schlüssel (max. 3)
+uint8_t v_skey;					//aktuelle Anzahl Schlüssel (max. 1)
 uint8_t v_sweih;				//aktuelle Anzahl Weihwasserphiole (max. 3)
 
 uint8_t v_pflock;				//Eispflock in Besitz
@@ -61,5 +61,5 @@ uint8_t v_gmk [5];				//Map-Koordinate Gegner
 uint8_t v_gri [5];                              //Richtungsanzeige
 
 //Umgebung
-uint8_t v_kiste [5];				//Kisten offen true / false
+uint8_t v_kiste [7];				//Kisten offen true / false
 uint8_t v_tuer [3];				// Tuer offen true / false			
