@@ -341,17 +341,53 @@ void p_level_room18 (void) __nonbanked
 	}	
 }
 
+//Raum 19 spezifische Aspekte
 void p_level_room19 (void) __nonbanked
 {
 	if (v_smk == 125) {
 		p_engine_loadMap (room18);
 		p_engine_showMap (room18);
 
-		p_level_changeRoom (16, v_sxk, v_sxk);
+		p_level_changeRoom (18, 16, v_syk);
+
+	}
+	else if (v_smk == 108) {
+		p_engine_loadMap (room20);
+		p_engine_showMap (room20);
+
+		p_level_changeRoom (20, 152, v_syk);
 	}
 	p_umgebung_truheUhr (44, 5);
 	p_umgebung_truheWeihwasser (41, 6);
 	p_umgebung_truheHerz (38, 7);	
+}
+
+//Raum 20 spezifische Aspekte
+void p_level_room20 (void) __nonbanked
+{
+	if (v_smk == 125) {
+		p_engine_loadMap (room19);
+		p_engine_showMap (room19);
+
+		p_level_changeRoom (19, 16, v_syk);
+	}
+	else if (v_smk == 108) {
+		p_engine_loadMap (room21);
+		p_engine_showMap (room21);
+
+		p_level_changeRoom (21, 152, v_syk);
+	}
+}
+
+//Raum 21 spezifische Aspekte
+void p_level_room21 (void) __nonbanked
+{
+	if (v_smk == 125) {
+		p_engine_loadMap (room20);
+		p_engine_showMap (room20);
+
+		p_level_changeRoom (20, 16, v_syk);
+	}
 }
 
 //Levelkontrolle
@@ -376,4 +412,6 @@ void p_level_control (void) __nonbanked
 	else if (v_room == 17) p_level_room17 ();
 	else if (v_room == 18) p_level_room18 ();
 	else if (v_room == 19) p_level_room19 ();
+	else if (v_room == 20) p_level_room20 ();
+	else if (v_room == 21) p_level_room21 ();
 }
