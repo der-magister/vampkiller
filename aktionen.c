@@ -23,6 +23,10 @@
 #include "aktionen.h"
 #include "engine.h"
 #include "cdesign.h"
+#include "init.h"
+#include "gegner.h"
+
+#include "gfx/others/others.h"
 
 //Weihwasser an Spielerposition werfen
 void p_use_weihwasser (void) __nonbanked
@@ -34,4 +38,27 @@ void p_use_weihwasser (void) __nonbanked
 		
 		p_cdesign_showWeihwasser ();
 	}
+}
+
+//Eingangsintro
+void p_intro (void) __nonbanked
+{
+	SHOW_BKG;
+	set_bkg_tiles (0, 0, 20, 18, zfx);
+	delay (2000);
+	set_bkg_tiles (0, 0, 20, 18, title);
+	waitpad (J_START);
+	v_tmp = 1;
+}
+
+//Ablauf bei Gameover
+void p_gameover (void) __nonbanked
+{
+	HIDE_SPRITES;
+	set_bkg_tiles (0, 0, 20, 18, gameover);
+	waitpad (J_START);
+	v_gameover = TRUE;
+	p_gegner_unset ();
+	v_time = 255; v_gameover = FALSE; v_movetimer = 0; v_gegnertimer = 0; v_timertimer = 0;
+	p_init_stage_2 ();
 }

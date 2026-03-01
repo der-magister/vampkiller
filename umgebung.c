@@ -63,6 +63,7 @@ void p_umgebung_truheWeihwasser (uint8_t l_mk, uint8_t l_nr) __nonbanked
 
 }
 
+//Tuer zu
 void p_umgebung_tuerzu (uint8_t l_mk, uint8_t l_nr) __nonbanked
 {
 	if ((l_mk == v_smk) && (v_tuer [l_nr] == FALSE)) {
@@ -90,7 +91,7 @@ void p_umgebung_truheHerz (uint8_t l_mk, uint8_t l_nr) __nonbanked
 }
 
 //Truhe mit Schlüssel 
-void p_umgebung_truheSchluessel (uint8_t l_mk, uint8_t l_nr) __nonbanked
+/*void p_umgebung_truheSchluessel (uint8_t l_mk, uint8_t l_nr) __nonbanked
 {
 	if ((l_mk == v_smk) && (v_kiste [l_nr] == 0)) {
 		p_text_viewTXT (schluessel);
@@ -107,7 +108,7 @@ void p_umgebung_truheSchluessel (uint8_t l_mk, uint8_t l_nr) __nonbanked
 	else if ((l_mk == v_smk) && (v_kiste [l_nr] == 1)) {
 		p_text_viewTXT (leer);
 	}
-}
+}*/
 
 //Truhe mit Uhr 
 void p_umgebung_truheUhr (uint8_t l_mk, uint8_t l_nr) __nonbanked

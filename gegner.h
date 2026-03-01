@@ -27,6 +27,8 @@
 
 extern void p_gegner_init (void) __nonbanked;
 extern void p_gegner_set (uint8_t l_nr, uint8_t l_sprnr, uint8_t l_xk, uint8_t l_yk, uint8_t l_lp, uint8_t l_ri) __nonbanked;
+extern uint8_t v_gegner_kolision (unsigned char l_tile) __nonbanked;
+extern void v_gegner_kolision_player (void) __nonbanked;
 extern void p_gegner_move (void) __nonbanked;
 extern void p_gegner_unset (void) __nonbanked;
 extern void p_gegner_lvlset (void) __nonbanked;

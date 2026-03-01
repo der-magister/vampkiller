@@ -41,6 +41,7 @@
 //Kolissionsdaten Umgebung
 extern const unsigned char v_kolidat [4];
 
+extern uint8_t v_game;
 extern uint8_t v_gameover;				//Statusvariable, ob Hauptspielschleife noch aktiv ist
 extern uint8_t v_angriff;				//Statusvariable, ob gerade Kampfaktivität
 extern uint8_t v_action;				//Statusvariable, ob eine Aktion stattfindet
@@ -49,6 +50,7 @@ extern uint8_t v_action;				//Statusvariable, ob eine Aktion stattfindet
 extern uint8_t v_movetimer;				//Bewegungstimer für Spieler
 extern uint8_t v_angriffstimer;				//Timer für Attackgrafik Spieler
 extern uint8_t v_gegnertimer;				//Bewegungstimer für Gegner
+extern uint8_t v_kolitimer;				//Timer für Kolision zwischen Spieler und Gegner
 extern uint8_t v_timertimer;				//Untertimer für Zeit
 
 //Leveldaten
@@ -60,7 +62,7 @@ extern unsigned char v_lvldatmod [252];			//modifizierten Grafikdaten des aktuel
 
 //Spielerdaten
 extern uint8_t v_slp;					//aktuelle Lebensenergie Spieler (max. 3)
-extern uint8_t v_skey;					//aktuelle Anzahl Schlüssel (max. 3)
+//extern uint8_t v_skey;					//aktuelle Anzahl Schlüssel (max. 3)
 extern uint8_t v_sweih;					//aktuelle Anzahl Weihwasserphiole (max. 3)
 
 extern uint8_t v_pflock;				//Eispflock in Besitz
@@ -79,6 +81,8 @@ extern uint8_t v_gri [5];                               //Richtungsanzeige
 
 //umgebung
 extern uint8_t v_kiste [8];				//Kisten offen True / false
-extern uint8_t v_tuer [3];				// Tuer offen true / false			
+extern uint8_t v_tuer [3];				// Tuer offen true / false
+
+extern uint8_t v_tmp;
 
 #endif

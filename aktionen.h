@@ -26,5 +26,7 @@
 #include "globals.h"
 
 extern void p_use_weihwasser (void) __nonbanked;
+extern void p_gameover (void) __nonbanked;
+extern void p_intro (void) __nonbanked;
 
 #endif

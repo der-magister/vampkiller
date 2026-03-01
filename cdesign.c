@@ -47,10 +47,10 @@ void p_cdesign_showLP (void) __nonbanked
 }
 
 //Zeigt Anzahl der Schlüssel an
-void p_cdesign_showKey (void) __nonbanked
+/*void p_cdesign_showKey (void) __nonbanked
 {
 	p_cdesign_umwandlung (v_skey % 10, 12, 16);
-}
+}*/
 
 //Zeigt Anzahl Weihwasser an
 void p_cdesign_showWeihwasser (void) __nonbanked
@@ -94,7 +94,7 @@ void p_cdesign_showStatus (void) __nonbanked
 {
 	p_cdesign_showLP ();
 	p_cdesign_showWeihwasser ();
-	p_cdesign_showKey ();
+	//p_cdesign_showKey ();
 	p_cdesign_showMapKoord ();
 	p_cdesign_showTime ();
 }

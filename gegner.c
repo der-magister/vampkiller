@@ -22,6 +22,7 @@
 
 #include "gegner.h"
 #include "engine.h"
+#include "cdesign.h"
 
 void p_gegner_init (void) __nonbanked
 {
@@ -54,6 +55,21 @@ uint8_t v_gegner_kolision (unsigned char l_tile) __nonbanked
 
 	}
 	return TRUE;
+}
+
+void v_gegner_kolision_player (void) __nonbanked
+{
+	uint8_t l_nr;
+
+	for (l_nr = 2; l_nr <= 4; l_nr++) {
+
+		if (v_gmk [l_nr] == v_smk)
+		{
+			--v_slp;
+			p_cdesign_showLP ();
+			v_kolitimer = 14;
+		}
+	}
 }
 
 ///Gegner die sich bewegen

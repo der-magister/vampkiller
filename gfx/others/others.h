@@ -24,5 +24,7 @@
 #define _OTHERS_H_
 
 extern const unsigned char gameover[];
+extern const unsigned char title[];
+extern const unsigned char zfx[];
 
 #endif

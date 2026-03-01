@@ -26,61 +26,76 @@
 #include "cdesign.h"
 #include "gegner.h"
 #include "level.h"
+#include "aktionen.h"
 
 void main (void) __nonbanked
 {
-	p_init_stage_1 ();
-	p_init_stage_2 ();
-
-	v_angriffstimer = 0;
-
-	//Hauptspielschleife
-	while (v_gameover == FALSE)
+	v_game = TRUE;
+	
+	while (v_game == TRUE)
 	{
-		//Spielerbewegung
-		if (v_movetimer == 7) {
-			if (joypad () & J_UP) p_player_move (UP);
-			else if (joypad () & J_DOWN) p_player_move (DOWN);
-			else if (joypad () & J_LEFT) p_player_move (LEFT);
-			else if (joypad () & J_RIGHT) p_player_move (RIGHT);
+		p_init_stage_1 ();
 
-			v_movetimer = 0;
-			p_cdesign_showMapKoord ();
-			p_cdesign_showXK ();
-			p_cdesign_showYK ();
+		if (v_tmp == 0) { p_intro (); }
+
+		p_init_stage_2 ();
+
+		v_angriffstimer = 0;
+
+		//Hauptspielschleife
+		while (v_gameover == FALSE)
+		{
+			//Spielerbewegung
+			if (v_movetimer == 7) {
+				if (joypad () & J_UP) p_player_move (UP);
+				else if (joypad () & J_DOWN) p_player_move (DOWN);
+				else if (joypad () & J_LEFT) p_player_move (LEFT);
+				else if (joypad () & J_RIGHT) p_player_move (RIGHT);
+
+				v_movetimer = 0;
+				p_cdesign_showMapKoord ();
+				p_cdesign_showXK ();
+				p_cdesign_showYK ();
+			}
+
+			if ((joypad () & J_A) && (v_angriff == FALSE)) {
+	        		p_level_control ();
+	        		
+	        		p_player_attack ();
+	        	}
+
+	        	/*if ((joypad () & J_B) && (v_angriff == FALSE)) {
+	        		//p_use_weihwasser ();
+	        	}*/
+
+	        	//Angriffsprite unsichtabr
+			if (v_angriffstimer == 8) {
+	        		move_sprite (1, 0, 0); v_angriff = FALSE;
+	      		}
+
+	      		if (v_gegnertimer == 9) {
+	      			p_gegner_move ();
+	      		}
+
+	      		if (v_angriff == TRUE) v_angriffstimer++;
+
+	      		if (v_gegnertimer < 255) v_gegnertimer++;
+	      		if (v_kolitimer != 0) --v_kolitimer;
+
+			++v_movetimer;
+			++v_timertimer;
+			
+			if (v_timertimer == 100) {
+				--v_time;
+				p_cdesign_showTime ();
+				v_timertimer = 0;
+			}
+
+			if (v_kolitimer == 0)  v_gegner_kolision_player ();
+
+			if (v_slp <= 0) p_gameover ();
+
+			wait_vbl_done ();
 		}
-
-		if ((joypad () & J_A) && (v_angriff == FALSE)) {
-        		p_level_control ();
-        		
-        		p_player_attack ();
-        	}
-
-        	/*if ((joypad () & J_B) && (v_angriff == FALSE)) {
-        		//p_use_weihwasser ();
-        	}*/
-
-        	//Angriffsprite unsichtabr
-		if (v_angriffstimer == 8) {
-        		move_sprite (1, 0, 0); v_angriff = FALSE;
-      		}
-
-      		if (v_gegnertimer == 9) {
-      			p_gegner_move ();
-      		}
-
-      		if (v_angriff == TRUE) v_angriffstimer++;
-
-      		if (v_gegnertimer < 255) v_gegnertimer++;
-
-		++v_movetimer;
-		++v_timertimer;
-		
-		if (v_timertimer == 100) {
-			--v_time;
-			p_cdesign_showTime ();
-			v_timertimer = 0;
-		}
-		wait_vbl_done ();
 	}
 }
